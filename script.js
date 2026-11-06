@@ -1,406 +1,528 @@
 /**
- * KAUSTUBH.EXE — script.js
- * VS Code Dark + Amethyst theme
- * Navigation · Curiosity Terminal · Scroll Reveal · Breadcrumb
+ * VS Code, but it's my portfolio — script.js
+ * Kaustubh Bhabal
+ * Tab management · Line numbers · Terminal · Sidebar
  */
 
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   1. SIDEBAR FILE HIGHLIGHT & BREADCRUMB UPDATE on scroll
+   STATE
    ═══════════════════════════════════════════════════════════ */
-(function initScrollSpy() {
-  const sections    = document.querySelectorAll('section[id]');
-  const sidebarFiles = document.querySelectorAll('.sidebar__file, .sidebar__symbol');
-  const bcSymbol    = document.getElementById('breadcrumb-symbol');
-  const bcCurrent   = document.getElementById('breadcrumb-current');
-
-  if (!sections.length) return;
-
-  // Map section IDs to labels
-  const labels = {
-    hero:         { symbol: 'Hero',         file: 'index.html' },
-    about:        { symbol: 'about()',       file: 'about.md'   },
-    experience:   { symbol: 'experience',    file: 'experience.md' },
-    superpowers:  { symbol: 'skills{}',      file: 'index.html' },
-    projects:     { symbol: 'projects[]',    file: 'index.html' },
-    achievements: { symbol: 'achievements[]',file: 'achievements.md' },
-    terminal:     { symbol: 'terminal()',    file: 'terminal.js' },
-    education:    { symbol: 'education[]',   file: 'index.html' },
-    contact:      { symbol: 'connect()',     file: 'contact.md' },
-  };
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      const info = labels[id] || { symbol: id, file: 'index.html' };
-
-      // Breadcrumb
-      if (bcSymbol)  bcSymbol.textContent  = info.symbol;
-      if (bcCurrent) bcCurrent.textContent = info.file;
-
-      // Sidebar highlight
-      sidebarFiles.forEach(el => {
-        const href = el.getAttribute('href');
-        el.classList.toggle('sidebar__file--active', href === `#${id}`);
-      });
-    });
-  }, { threshold: 0.25, rootMargin: '0px 0px -30% 0px' });
-
-  sections.forEach(s => observer.observe(s));
-})();
-
+const state = {
+  activePage: 'welcome',
+  openTabs:   ['welcome'],
+  termOpen:   false,
+};
 
 /* ═══════════════════════════════════════════════════════════
-   2. SCROLL REVEAL
+   PAGE METADATA
    ═══════════════════════════════════════════════════════════ */
-(function initScrollReveal() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+const pages = {
+  welcome:      { label: 'welcome',      icon: true },
+  about:        { label: 'about',        icon: true },
+  experience:   { label: 'experience',   icon: true },
+  projects:     { label: 'projects',     icon: true },
+  skills:       { label: 'skills',       icon: true },
+  achievements: { label: 'achievements', icon: true },
+  contact:      { label: 'contact',      icon: true },
+};
 
-  const targets = [
-    '.power-card', '.project-card', '.achievement-card',
-    '.edu-card', '.contact-card', '.timeline-item',
-    '.about__text', '.about__meta', '.section__header',
-  ];
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════ */
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
 
-  const els = document.querySelectorAll(targets.join(', '));
-  els.forEach(el => el.classList.add('reveal'));
+function fileIcon() {
+  return `<svg class="tab__icon" viewBox="0 0 16 16" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>`;
+}
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+/* ═══════════════════════════════════════════════════════════
+   LINE NUMBERS
+   ═══════════════════════════════════════════════════════════ */
+function buildLineNumbers(pageId) {
+  const page = document.getElementById('page-' + pageId);
+  if (!page) return;
+
+  const lineCol   = page.querySelector('.line-col');
+  const contentEl = page.querySelector('.editor__content');
+  if (!lineCol || !contentEl) return;
+
+  const lines = contentEl.querySelectorAll('.line');
+  lineCol.innerHTML = '';
+
+  lines.forEach((_, i) => {
+    const span = document.createElement('span');
+    span.className = 'line-num';
+    span.textContent = i + 1;
+    lineCol.appendChild(span);
+  });
+}
+
+function buildAllLineNumbers() {
+  Object.keys(pages).forEach(id => buildLineNumbers(id));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════════════════════ */
+const tabBar = document.getElementById('tabBar');
+
+function renderTabs() {
+  tabBar.innerHTML = '';
+
+  state.openTabs.forEach(id => {
+    const meta = pages[id];
+    if (!meta) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (id === state.activePage ? ' tab--active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', id === state.activePage ? 'true' : 'false');
+    btn.setAttribute('aria-label', 'Open ' + meta.label);
+    btn.setAttribute('data-page', id);
+
+    btn.innerHTML =
+      fileIcon() +
+      `<span>${esc(meta.label)}</span>` +
+      `<span class="tab__close" data-close="${esc(id)}" role="button" aria-label="Close ${esc(meta.label)}">×</span>`;
+
+    tabBar.appendChild(btn);
+  });
+}
+
+function openPage(id) {
+  if (!pages[id]) return;
+
+  if (!state.openTabs.includes(id)) {
+    state.openTabs.push(id);
+  }
+
+  const currentPage = document.getElementById('page-' + state.activePage);
+  if (currentPage) {
+    currentPage.classList.remove('page--active');
+    currentPage.style.display = '';
+    currentPage.hidden = true;
+  }
+
+  state.activePage = id;
+  const newPage = document.getElementById('page-' + id);
+  if (newPage) {
+    newPage.hidden = false;
+    newPage.classList.add('page--active');
+    newPage.style.display = 'flex';
+  }
+
+  updateSidebarHighlight(id);
+  renderTabs();
+  attachTabCloseListeners();
+}
+
+function closePage(id) {
+  const idx = state.openTabs.indexOf(id);
+  if (idx === -1) return;
+
+  state.openTabs.splice(idx, 1);
+
+  const page = document.getElementById('page-' + id);
+  if (page) {
+    page.classList.remove('page--active');
+    page.style.display = '';
+    page.hidden = true;
+  }
+
+  if (state.activePage === id) {
+    if (state.openTabs.length > 0) {
+      const nextId = state.openTabs[Math.min(idx, state.openTabs.length - 1)];
+      openPage(nextId);
+      return;
+    } else {
+      state.activePage = '';
+    }
+  }
+
+  renderTabs();
+  attachTabCloseListeners();
+}
+
+function attachTabCloseListeners() {
+  tabBar.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      closePage(btn.getAttribute('data-close'));
+    });
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        closePage(btn.getAttribute('data-close'));
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  });
+}
 
-  els.forEach(el => observer.observe(el));
-})();
-
+tabBar.addEventListener('click', e => {
+  const tab = e.target.closest('[data-page]');
+  if (!tab) return;
+  if (e.target.hasAttribute('data-close')) return;
+  openPage(tab.getAttribute('data-page'));
+});
 
 /* ═══════════════════════════════════════════════════════════
-   3. CURIOSITY TERMINAL
+   SIDEBAR
    ═══════════════════════════════════════════════════════════ */
-(function initTerminal() {
+function updateSidebarHighlight(id) {
+  document.querySelectorAll('.sidebar__file').forEach(btn => {
+    btn.classList.toggle('sidebar__file--active', btn.getAttribute('data-page') === id);
+  });
+}
 
-  const output   = document.getElementById('terminalOutput');
-  const input    = document.getElementById('terminalInput');
-  const runBtn   = document.getElementById('terminalRunBtn');
-  const clearBtn = document.getElementById('terminalClearBtn');
-  const chips    = document.querySelectorAll('.chip');
+document.querySelectorAll('.sidebar__file').forEach(btn => {
+  btn.addEventListener('click', () => {
+    openPage(btn.getAttribute('data-page'));
+  });
+});
 
-  if (!output || !input) return;
+const folderToggle = document.getElementById('folderToggle');
+const fileList     = document.getElementById('fileList');
 
-  /* ── Command history ─── */
-  const history = [];
-  let historyIndex = -1;
+folderToggle?.addEventListener('click', () => {
+  const expanded = folderToggle.getAttribute('aria-expanded') === 'true';
+  folderToggle.setAttribute('aria-expanded', String(!expanded));
+  fileList.hidden = expanded;
+});
 
-  /* ── Surprise rotation ── */
-  const surprises = [
-    {
-      label: 'On curiosity',
-      text: `I describe myself as a blend of <span class="t-hl">curiosity, imagination, and perseverance</span>.\nNot a bad stack for engineering problems.`
-    },
-    {
-      label: 'Introvert mode',
-      text: `Animal lover. Introvert. <span class="t-hl">Art</span> is a genuine field of interest — not just something I say.\nThe coding club lead thing is a contradiction I live with.`
-    },
-    {
-      label: 'Language sidebar',
-      text: `I speak Marathi natively, Hindi professionally, English fully — and <span class="t-hl">Japanese at elementary level</span>.\nYes, I'm studying Japanese. No, I don't know why either. Curiosity, remember?`
-    },
-    {
-      label: 'ABVP chapter',
-      text: `As Technical Head of ABVP–SCOE, I planned events for <span class="t-hl">schools and colleges across Maharashtra</span>.\nManaging teams for external events is different from building projects alone. Both are worth doing.`
-    },
-    {
-      label: 'The Shaip gig',
-      text: `I contributed speech data to <span class="t-hl">AI training pipelines at Shaip</span> for two months.\nSomeone's voice model might be slightly better because of sentences I recorded at odd hours.`
-    },
-    {
-      label: 'On teams',
-      text: `"I am a responsible person, especially when I am in a team. I try my best to\ncontribute and be helpful." — that's actually <span class="t-hl">from my LinkedIn summary</span>. I meant it.`
-    },
-    {
-      label: 'Excel certification',
-      text: `Yes, I have a <span class="t-hl">Microsoft Excel: From Zero to Hero</span> certification.\nDon't sleep on spreadsheets. Data lives there before it lives anywhere else.`
-    },
-  ];
-  let surpriseIndex = 0;
+/* ═══════════════════════════════════════════════════════════
+   TERMINAL TOGGLE
+   ═══════════════════════════════════════════════════════════ */
+const termPanel    = document.getElementById('terminalPanel');
+const termToggle   = document.getElementById('termToggle');
+const termClose    = document.getElementById('termClose');
+const termMaximise = document.getElementById('termMaximise');
+const panelResize  = document.getElementById('panelResize');
 
-  /* ── Commands ─── */
-  const commands = {
+const PANEL_DEFAULT_H = 260;
+const PANEL_MIN_H     = 120;
+let panelMaximised    = false;
+let panelNormalH      = PANEL_DEFAULT_H;
 
-    help() {
-      return html`<span class="t-section">// available commands</span>
-<div class="t-row"><span class="t-key t-yellow">whoami</span><span>who is Kaustubh Bhabal</span></div>
-<div class="t-row"><span class="t-key t-yellow">superpower</span><span>what drives the approach to tech</span></div>
-<div class="t-row"><span class="t-key t-yellow">skills</span><span>technical areas and tools</span></div>
-<div class="t-row"><span class="t-key t-yellow">projects</span><span>current and completed projects</span></div>
-<div class="t-row"><span class="t-key t-yellow">experience</span><span>roles and responsibilities</span></div>
-<div class="t-row"><span class="t-key t-yellow">funfact</span><span>something unexpected</span></div>
-<div class="t-row"><span class="t-key t-yellow">surprise</span><span>rotating reveal — run multiple times</span></div>
-<div class="t-row"><span class="t-key t-yellow">clear</span><span>reset terminal output</span></div>`;
-    },
+function openTerminal() {
+  if (!termPanel) return;
+  termPanel.hidden = false;
+  termPanel.style.height = panelNormalH + 'px';
+  state.termOpen = true;
+  document.getElementById('termInput')?.focus();
+}
+function closeTerminal() {
+  if (!termPanel) return;
+  termPanel.hidden = true;
+  state.termOpen = false;
+  panelMaximised = false;
+}
 
-    whoami() {
-      return html`<span class="t-section">// identity</span>
-<div class="t-row"><span class="t-key t-blue">name</span><span class="t-hl">Kaustubh Bhabal</span></div>
-<div class="t-row"><span class="t-key t-blue">degree</span><span>BE, Artificial Intelligence & ML</span></div>
-<div class="t-row"><span class="t-key t-blue">college</span><span>Siddhant College of Engineering, Pune</span></div>
-<div class="t-row"><span class="t-key t-blue">year</span><span>2024 → 2028</span></div>
-<div class="t-row"><span class="t-key t-blue">location</span><span>Pune, Maharashtra, India</span></div>
-<div class="t-row"><span class="t-key t-blue">current_role</span><span class="t-hl">Lead @ Forge – The Coding Club</span></div>
-<div class="t-row"><span class="t-key t-blue">also</span><span>Google Student Ambassador (India)</span></div>
+termToggle?.addEventListener('click', () => {
+  state.termOpen ? closeTerminal() : openTerminal();
+});
+termClose?.addEventListener('click', closeTerminal);
 
-<span class="t-section">// summary</span>
-<span class="t-muted">"A blend of curiosity, imagination, and perseverance.</span>
-<span class="t-muted"> Pragmatic and considerate. Animal lover. Introvert.</span>
-<span class="t-muted"> Art is a genuine field of interest."</span>`;
-    },
+termMaximise?.addEventListener('click', () => {
+  if (!termPanel) return;
+  panelMaximised = !panelMaximised;
+  if (panelMaximised) {
+    panelNormalH = termPanel.offsetHeight;
+    termPanel.style.height = '70vh';
+    termMaximise.setAttribute('title', 'Restore panel');
+    termMaximise.setAttribute('aria-label', 'Restore panel');
+  } else {
+    termPanel.style.height = panelNormalH + 'px';
+    termMaximise.setAttribute('title', 'Maximise panel');
+    termMaximise.setAttribute('aria-label', 'Maximise panel');
+  }
+});
 
-    superpower() {
-      return html`<span class="t-section">// tech superpower</span>
-<span class="t-hl">Curiosity-driven engineering.</span>
+/* Drag-to-resize */
+if (panelResize && termPanel) {
+  let dragging = false;
+  let startY   = 0;
+  let startH   = 0;
 
-I don't pick tools because they're trending.
-I pick them because a problem I care about <span class="t-hl">demands</span> them.
+  panelResize.addEventListener('mousedown', e => {
+    dragging = true;
+    startY   = e.clientY;
+    startH   = termPanel.offsetHeight;
+    document.body.style.cursor     = 'ns-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
 
-Sahi Bin needed on-device ML → learned Google ML Kit.
-Pritha needed accessible design → went deep into Figma and colour systems.
-Robotics challenge needed simulation → picked up CoppeliaSim.
-Coding club needed leadership → became the lead.
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const delta = startY - e.clientY;
+    const newH  = Math.max(PANEL_MIN_H, startH + delta);
+    termPanel.style.height = newH + 'px';
+    panelNormalH   = newH;
+    panelMaximised = false;
+  });
 
-<span class="t-muted">The superpower isn't any single skill.
-It's being comfortable starting from nothing
-when the problem is interesting enough.</span>`;
-    },
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    document.body.style.cursor     = '';
+    document.body.style.userSelect = '';
+  });
+}
 
-    skills() {
-      return html`<span class="t-section">// web</span>
-<div class="t-row"><span class="t-key">HTML / CSS / JS</span><span>semantic, responsive, no frameworks</span></div>
+/* ═══════════════════════════════════════════════════════════
+   CURIOSITY TERMINAL — COMMANDS
+   ═══════════════════════════════════════════════════════════ */
+const surprises = [
+  {
+    label: 'On curiosity',
+    text: `I'd describe myself as a blend of <span class="t-hl">curiosity, imagination\nand perseverance</span>. Not a bad stack for engineering problems.`
+  },
+  {
+    label: 'Four languages',
+    text: `I speak Marathi natively, Hindi professionally, English at full\nprofessional level — and <span class="t-hl">Japanese at elementary level</span>.\nYes, I am studying Japanese. Curiosity's fault entirely.`
+  },
+  {
+    label: 'On teams',
+    text: `I am a responsible person, especially when in a team.\nI try my best to contribute and be helpful.\nBeing <span class="t-hl">pragmatic and considerate</span> helps me solve problems\nwhile understanding other people's perspectives.`
+  },
+  {
+    label: 'Animal lover',
+    text: `I am an animal lover, introvert and someone who finds\n<span class="t-hl">art to be a genuine field of interest</span>.\nLeading a coding club is a productive contradiction.`
+  },
+  {
+    label: 'Speech data',
+    text: `I contributed speech data to <span class="t-hl">AI training pipelines at Shaip</span>\nfor two months. Someone's language model might sound\nslightly better because of sentences I recorded.`
+  },
+  {
+    label: 'Excel certified',
+    text: `Yes, I have a <span class="t-hl">Microsoft Excel certification</span>.\nDo not sleep on spreadsheets.\nData lives there before it lives anywhere else.`
+  },
+  {
+    label: 'AWS Campus Leader',
+    text: `I participated in the <span class="t-hl">AWS Student Builder Campus Leader</span>\nprogram — introducing students to cloud technology,\nthe AWS ecosystem and developer resources.\nThis portfolio was built as part of that challenge.`
+  },
+];
+let surpriseIdx = 0;
 
-<span class="t-section">// app development</span>
-<div class="t-row"><span class="t-key">Flutter + Dart</span><span>cross-platform mobile</span></div>
-<div class="t-row"><span class="t-key">Firebase</span><span>Firestore, Auth, real-time sync</span></div>
+const termCommands = {
 
-<span class="t-section">// AI / ML</span>
-<div class="t-row"><span class="t-key">ML Fundamentals</span><span>model training basics</span></div>
-<div class="t-row"><span class="t-key">Google ML Kit</span><span>on-device inference</span></div>
+  help() {
+    return `<span class="t-hl">Available commands</span>
 
-<span class="t-section">// robotics</span>
-<div class="t-row"><span class="t-key">CoppeliaSim</span><span>robot simulation & path planning</span></div>
-<div class="t-row"><span class="t-key">Arduino / ESP32</span><span>embedded microcontrollers</span></div>
+<span class="t-blue">whoami     </span>  Get to know me
+<span class="t-blue">skills     </span>  Explore my technical interests
+<span class="t-blue">projects   </span>  Discover what I've been building
+<span class="t-blue">experience </span>  Explore my roles and responsibilities
+<span class="t-blue">funfact    </span>  Find something unexpected about me
+<span class="t-blue">surprise   </span>  Rotating reveal — run multiple times
+<span class="t-blue">clear      </span>  Clear terminal output`;
+  },
 
-<span class="t-section">// design & cloud</span>
-<div class="t-row"><span class="t-key">Figma / Canva</span><span>UI/UX, visual identity</span></div>
-<div class="t-row"><span class="t-key">AWS Amplify</span><span>static hosting, CI/CD</span></div>
-<div class="t-row"><span class="t-key">Microsoft Excel ✓</span><span>certified — From Zero to Hero</span></div>`;
-    },
+  whoami() {
+    return `<span class="t-hl">Kaustubh Bhabal</span>
+<span class="t-blue">Degree    </span>  BE, Artificial Intelligence &amp; Machine Learning
+<span class="t-blue">College   </span>  Siddhant College of Engineering, Pune
+<span class="t-blue">Year      </span>  Third year (2024 – 2028)
+<span class="t-blue">Location  </span>  Pune, Maharashtra, India
+<span class="t-blue">Roles     </span>  Lead @ Forge — The Coding Club
+<span class="t-blue">          </span>  Google Student Ambassador (India)
+<span class="t-blue">          </span>  AWS Student Builder Campus Leader
 
-    projects() {
-      return html`<span class="t-section">// in development</span>
-<div class="t-row"><span class="t-key t-hl">Sahi Bin</span><span>smart waste segregation</span></div>
-<span class="t-muted">  → Flutter, Firebase, Google ML Kit</span>
-<span class="t-muted">  → citizen / worker / admin role flows</span>
-<span class="t-muted">  → on-device waste classification</span>
+<span class="t-dim">"Curiosity beats obsession.
+ A blend of curiosity, imagination and perseverance.
+ Interested in the intersection of hardware,
+ software and creativity."</span>`;
+  },
 
-<span class="t-section">// design concept</span>
-<div class="t-row"><span class="t-key t-yellow">Pritha</span><span>nutrition & wellness platform</span></div>
-<span class="t-muted">  → Figma, product thinking, accessible UI</span>
+  skills() {
+    return `<span class="t-hl">Technical Areas</span>
 
-<span class="t-section">// completed</span>
-<div class="t-row"><span class="t-key t-green">Robotics Sim</span><span>Lam Research Challenge 2024</span></div>
-<span class="t-muted">  → CoppeliaSim, inverse kinematics, path planning</span>`;
-    },
+<span class="t-yel">Web             </span>  HTML · CSS · JavaScript
+<span class="t-yel">App Dev         </span>  Flutter · Dart · Firebase
+<span class="t-yel">AI / ML         </span>  AI/ML fundamentals · Model training · Google ML Kit
+<span class="t-yel">Robotics        </span>  CoppeliaSim · Arduino · ESP32
+<span class="t-yel">Design          </span>  Figma · Stitch · Canva
+<span class="t-yel">Other           </span>  GitHub · Microsoft Excel
 
-    experience() {
-      return html`<span class="t-section">// current</span>
-<div class="t-row"><span class="t-key t-hl">Lead</span><span>Forge – The Coding Club · Aug 2026–present</span></div>
-<div class="t-row"><span class="t-key t-hl">Ambassador</span><span>Google Student Ambassadors · May 2026–present</span></div>
-<div class="t-row"><span class="t-key t-hl">NSS Volunteer</span><span>Siddhant CoE · Jun 2025–present</span></div>
+<span class="t-dim">Explored through projects, coursework and plenty
+of random experimentation.</span>`;
+  },
 
-<span class="t-section">// past</span>
-<div class="t-row"><span class="t-key t-yellow">AI Data Contrib.</span><span>Shaip · Jul–Aug 2026</span></div>
-<div class="t-row"><span class="t-key t-yellow">Technical Head</span><span>ABVP–SCOE · Nov 2025–Jul 2026</span></div>
-<div class="t-row"><span class="t-key t-yellow">Marketing Intern</span><span>Eduveda Academy · Jan–Mar 2026</span></div>`;
-    },
+  projects() {
+    return `<span class="t-hl">Projects</span>
 
-    funfact() {
-      return html`<span class="t-section">// fun fact</span>
-I'm simultaneously a <span class="t-hl">Google Student Ambassador</span>
+<span class="t-yel">Sahi Bin              </span>  In Development
+  Smart waste segregation — Flutter, Dart, Firebase, ML Kit.
+  Role-based workflows, on-device image recognition.
+
+<span class="t-yel">Pritha                </span>  Design Concept
+  Nutrition and wellness platform — Figma.
+  Calm, accessible product design and UX thinking.
+
+<span class="t-green">Robotics Simulation   </span>  Completed · Lam Research Challenge 2024
+  CoppeliaSim — inverse kinematics, path planning,
+  team engineering.`;
+  },
+
+  experience() {
+    return `<span class="t-hl">Experience</span>
+
+<span class="t-blue">Current</span>
+  AWS Student Builder Campus Leader
+  Lead · Forge, The Coding Club · Aug 2026 – present
+  Google Student Ambassador · May 2026 – present
+  NSS Volunteer · Siddhant CoE · Jun 2025 – present
+
+<span class="t-blue">Past</span>
+  AI Speech Data Contributor · Shaip · Jul – Aug 2026
+  Technical Head · ABVP–SCOE · Nov 2025 – Jul 2026
+  Marketing Intern · Eduveda Academy · Jan – Mar 2026`;
+  },
+
+  funfact() {
+    return `<span class="t-hl">Fun Fact</span>
+
+I am simultaneously a <span class="t-hl">Google Student Ambassador</span>
 and the <span class="t-hl">Lead of a coding club</span> at the same college.
 
-So I explain Google's developer tools to the same people
-who also ask me why their code won't compile.
+That means I explain developer tools to the same people
+who also ask me why their code will not compile.
 
-<span class="t-muted">I also speak four languages including elementary Japanese.
-That last one was entirely curiosity's fault.</span>`;
-    },
+I speak four languages. Japanese was entirely curiosity's fault.
 
-    surprise() {
-      const pick = surprises[surpriseIndex % surprises.length];
-      surpriseIndex++;
-      return html`<span class="t-section">// ${escHtml(pick.label)}</span>
-${pick.text}`;
-    },
+Also: this portfolio is a VS Code-themed website
+built as part of the <span class="t-hl">AWS Student Builder Challenge</span>.
+The irony of using AWS tools to build something
+that looks like VS Code is not lost on me.`;
+  },
 
-    clear() {
-      clearTerminal();
-      return null;
-    },
-  };
+  surprise() {
+    const pick = surprises[surpriseIdx % surprises.length];
+    surpriseIdx++;
+    return `<span class="t-hl">${esc(pick.label)}</span>\n\n${pick.text}`;
+  },
 
-  /* ── Utilities ── */
-  function html(strings, ...values) {
-    return strings.reduce((acc, str, i) =>
-      acc + str + (values[i] !== undefined ? values[i] : ''), '');
+  clear() {
+    clearTerm();
+    return null;
+  },
+};
+
+/* ── Terminal run ── */
+const termOutput = document.getElementById('termOutput');
+const termInput  = document.getElementById('termInput');
+const termRun    = document.getElementById('termRun');
+
+const termHistory = [];
+let termHistIdx   = -1;
+
+function runCommand(raw) {
+  const cmd = raw.trim().toLowerCase();
+  if (!cmd) return;
+
+  if (termHistory[0] !== cmd) termHistory.unshift(cmd);
+  if (termHistory.length > 40) termHistory.pop();
+  termHistIdx = -1;
+
+  if (cmd === 'clear') { clearTerm(); return; }
+
+  const entry = document.createElement('div');
+  entry.className = 't-entry';
+
+  const cmdLine = document.createElement('div');
+  cmdLine.className = 't-cmd';
+  cmdLine.innerHTML =
+    `<span class="term-ps1"><span class="ps1-u">kaustubh</span><span class="ps1-s">@</span>` +
+    `<span class="ps1-h">portfolio</span><span class="ps1-d">:~$</span></span> ` +
+    `<span style="color:var(--tx-primary)">${esc(raw.trim())}</span>`;
+
+  const outEl = document.createElement('div');
+  outEl.className = 't-out';
+
+  if (termCommands[cmd]) {
+    const result = termCommands[cmd]();
+    if (result === null) return;
+    outEl.innerHTML = result;
+  } else {
+    outEl.innerHTML =
+      `<span class="t-err">command not found: ${esc(cmd)}</span>\n` +
+      `<span class="t-dim">Type <span class="t-hl">help</span> to see available commands.</span>`;
   }
 
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;');
+  entry.appendChild(cmdLine);
+  entry.appendChild(outEl);
+  termOutput.appendChild(entry);
+
+  requestAnimationFrame(() => { termOutput.scrollTop = termOutput.scrollHeight; });
+}
+
+function clearTerm() {
+  termOutput.querySelectorAll('.t-entry').forEach(e => e.remove());
+  if (termInput) { termInput.value = ''; termInput.focus(); }
+}
+
+termRun?.addEventListener('click', () => {
+  if (!termInput) return;
+  runCommand(termInput.value);
+  termInput.value = '';
+  termInput.focus();
+});
+
+termInput?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    runCommand(termInput.value);
+    termInput.value = '';
+    return;
   }
-
-  /* ── Run ── */
-  function runCommand(raw) {
-    const trimmed = raw.trim().toLowerCase();
-    if (!trimmed) return;
-
-    if (history[0] !== trimmed) history.unshift(trimmed);
-    if (history.length > 40) history.pop();
-    historyIndex = -1;
-
-    if (trimmed === 'clear') { clearTerminal(); return; }
-
-    const entry = document.createElement('div');
-    entry.className = 't-entry';
-
-    const cmdLine = document.createElement('div');
-    cmdLine.className = 't-cmd-line';
-    cmdLine.innerHTML =
-      `<span class="t-prompt">` +
-        `<span class="ps1-user">kaustubh</span>` +
-        `<span class="ps1-sep">@</span>` +
-        `<span class="ps1-host">portfolio</span>` +
-        `<span class="ps1-sep">:</span>` +
-        `<span class="ps1-dir">~</span>` +
-        `<span class="ps1-dollar">$</span>` +
-      `</span>` +
-      `<span class="t-cmd-text"> ${escHtml(raw.trim())}</span>`;
-
-    const outEl = document.createElement('div');
-    outEl.className = 't-output';
-
-    if (commands[trimmed]) {
-      const result = commands[trimmed]();
-      if (result === null) return;
-      outEl.innerHTML = result;
-    } else {
-      outEl.innerHTML =
-        `<span class="t-error">command not found: <strong>${escHtml(trimmed)}</strong></span>\n` +
-        `<span class="t-muted">Type <strong>help</strong> to see available commands.</span>`;
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (termHistIdx < termHistory.length - 1) {
+      termHistIdx++;
+      termInput.value = termHistory[termHistIdx] || '';
+      requestAnimationFrame(() =>
+        termInput.setSelectionRange(termInput.value.length, termInput.value.length));
     }
-
-    entry.appendChild(cmdLine);
-    entry.appendChild(outEl);
-    output.appendChild(entry);
-
-    requestAnimationFrame(() => {
-      output.scrollTop = output.scrollHeight;
-    });
+    return;
   }
-
-  function clearTerminal() {
-    output.querySelectorAll('.t-entry').forEach(e => e.remove());
-    input.value = '';
-    input.focus();
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (termHistIdx > 0) { termHistIdx--; termInput.value = termHistory[termHistIdx] || ''; }
+    else                 { termHistIdx = -1; termInput.value = ''; }
+    return;
   }
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const partial = termInput.value.trim().toLowerCase();
+    const match = Object.keys(termCommands).find(c => c.startsWith(partial));
+    if (match) termInput.value = match;
+    return;
+  }
+  if (e.key === 'Escape') { termInput.blur(); }
+});
 
-  /* ── Events ── */
-  runBtn.addEventListener('click', () => {
-    runCommand(input.value);
-    input.value = '';
-    input.focus();
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const cmd = chip.getAttribute('data-cmd');
+    if (!cmd) return;
+    if (!state.termOpen) openTerminal();
+    runCommand(cmd);
+    if (termInput) termInput.value = '';
   });
-
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      runCommand(input.value);
-      input.value = '';
-      return;
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (historyIndex < history.length - 1) {
-        historyIndex++;
-        input.value = history[historyIndex] || '';
-        requestAnimationFrame(() =>
-          input.setSelectionRange(input.value.length, input.value.length));
-      }
-      return;
-    }
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (historyIndex > 0) {
-        historyIndex--;
-        input.value = history[historyIndex] || '';
-      } else {
-        historyIndex = -1;
-        input.value = '';
-      }
-      return;
-    }
-
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      const partial = input.value.trim().toLowerCase();
-      if (!partial) return;
-      const match = Object.keys(commands).find(cmd => cmd.startsWith(partial));
-      if (match) input.value = match;
-      return;
-    }
-
-    if (e.key === 'Escape') {
-      input.blur();
-    }
-  });
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const cmd = chip.getAttribute('data-cmd');
-      if (!cmd) return;
-      runCommand(cmd);
-      input.value = '';
-      document.querySelector('.terminal')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  });
-
-  clearBtn?.addEventListener('click', clearTerminal);
-
-})();
-
+});
 
 /* ═══════════════════════════════════════════════════════════
-   4. STATUS BAR LINE/COL UPDATE  (cosmetic)
+   INIT
    ═══════════════════════════════════════════════════════════ */
-(function initStatusBar() {
-  // Shows scroll position as "line" in status bar
-  const lnCol = document.querySelector('.status-bar__right .status-item:last-of-type');
-  const content = document.querySelector('.editor-content');
-  if (!lnCol || !content) return;
-
-  content.addEventListener('scroll', () => {
-    const line = Math.round(content.scrollTop / 20) + 1;
-    lnCol.textContent = `Ln ${line}, Col 1`;
-  }, { passive: true });
+(function init() {
+  buildAllLineNumbers();
+  openPage('welcome');
 })();

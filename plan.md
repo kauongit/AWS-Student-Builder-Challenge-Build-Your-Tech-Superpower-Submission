@@ -1,175 +1,157 @@
-# KAUSTUBH.EXE — The Plan
+# VS Code, but it's my portfolio — Project Plan
 
 ## Project Overview
 
-**Project:** KAUSTUBH.EXE — Interactive Personal Portfolio  
-**Challenge:** AWS Student Builder Challenge: Build Your Tech Superpower  
-**Owner:** Kaustubh  
-**Location:** Siddhant College of Engineering, Pune  
+**Project title:** VS Code, but it's my portfolio.
+**Description:** A portfolio inspired by every dev's playground — VS Code; documenting my journey.
+**Challenge:** AWS Student Builder Challenge: Build Your Tech Superpower
+**Owner:** Kaustubh Bhabal
+**Location:** Siddhant College of Engineering, Pune
 **Core tagline:** Curiosity beats obsession.
 
-KAUSTUBH.EXE is an interactive personal portfolio reflecting my interests across AI/ML, robotics, application development, creative design, and philosophy. The experience should feel like exploring a developer's digital identity—not scrolling through a generic résumé.
+This is a personal portfolio website designed to feel like an active VS Code editor session. Visitors navigate through sections of the portfolio as if opening files in a code editor, complete with a sidebar Explorer, editor tabs, line numbers, syntax highlighting and an interactive terminal.
+
+---
 
 ## Goals
 
-- Present an authentic, memorable personal identity.
-- Showcase skills, projects, community involvement, and achievements.
-- Build a distinctive IDE-inspired **Curiosity Terminal** as the creative feature.
-- Keep the website responsive, accessible, fast, and easy to navigate.
-- Deploy the portfolio publicly using AWS Amplify Hosting.
+- Present an authentic, memorable personal identity without a generic template.
+- Showcase skills, projects, community involvement and achievements.
+- Build a distinctive Curiosity Terminal as the creative interactive feature.
+- Keep the website responsive, accessible, fast and easy to navigate.
 - Maintain a public GitHub repository with source code and documentation.
+- Deploy publicly — GitHub Pages (actual), AWS Amplify (intended target).
+
+---
 
 ## Audience
 
-Students, developers, recruiters, hackathon judges, and curious visitors.
+Students, developers, recruiters, hackathon judges, AWS challenge reviewers and curious visitors.
+
+---
 
 ## Brand & Visual Direction
 
-- **Name:** KAUSTUBH.EXE
-- **Tagline:** Curiosity beats obsession.
-- **Mood:** Curious, experimental, thoughtful, technical, playful, creative.
-- **Visual style:** Dark IDE/editor-inspired interface; charcoal surfaces; deep forest-green accents; restrained lime/purple highlights; crisp typography; subtle grids and micro-interactions.
-- Avoid generic portfolio templates, excessive gradients, clutter, and distracting animations.
-- The site should feel like a polished coding environment, while remaining readable and welcoming.
+- **Colour identity:** Amethyst `#9966CC` — used for active states, highlights, terminal accents, status bar and the floating terminal bubble
+- **Background:** VS Code Dark — charcoal `#1e1e1e` with `#252526` sidebar and `#333333` activity bar
+- **Typography:** JetBrains Mono — monospace font throughout, consistent with the code editor aesthetic
+- **Mood:** Curious, experimental, thoughtful, technical, minimal
+- **Style:** Polished coding environment; no excessive gradients, animations or clutter
+- **No forest-green/lime palette** — the colour direction is Amethyst-only
 
-## Site Structure
+---
 
-1. **Hero**
-   - KAUSTUBH.EXE wordmark
-   - “Curiosity beats obsession.”
-   - Short introduction
-   - Links to Projects, Curiosity Terminal, GitHub, and LinkedIn
+## Explorer Structure
 
-2. **About Me**
-   - Third-year AI & ML engineering student at Siddhant College of Engineering, Pune
-   - Curious about technology, robotics, creative design, and philosophy
-   - Light self-aware humour: “I enjoy going beyond the conventional classroom experience (well, I didn't go beyond… iykyk lol).”
-   - Emphasize experimentation and the intersection of hardware, software, and creativity
+The sidebar contains seven files (pages):
 
-3. **Tech Superpowers**
-   - Web: HTML, CSS, JavaScript
-   - App development: Flutter, Firebase
-   - AI/ML: fundamentals, model training
-   - Robotics: CoppeliaSim, Arduino, ESP32
-   - Creative tools: Figma, Stitch, Canva
-   - Present these honestly as technologies explored through projects and experimentation
+1. **welcome** — Introduction written as JS code with syntax highlighting and ASCII cat
+2. **about** — Personal background, education, languages spoken
+3. **experience** — Roles and responsibilities (AWS Campus Leader, Forge, GSA, ABVP, NSS, Shaip, Eduveda)
+4. **projects** — Sahi Bin, Pritha, Robotics Simulation, GitHub source link
+5. **skills** — Web, App Dev, AI/ML, Robotics, Design, Other Tools
+6. **achievements** — Community roles and Microsoft Excel certification
+7. **contact** — GitHub, LinkedIn, email, location
 
-4. **Selected Projects**
-   - **Sahi Bin — Smart Waste Segregation**
-     - Flutter, Firebase, Google ML Kit
-     - Citizen, worker, and admin workflows; on-device image recognition
-     - Status: In development
-   - **Pritha — Nutrition & Wellness Platform**
-     - Product/UI design concept
-     - Focus: calm, accessible experience, product thinking, visual identity
-     - Tools: Figma and digital design tools
-   - **Robotics Simulation — Lam Research Challenge 2024**
-     - CoppeliaSim, robotics simulation, collaborative engineering
-     - Clearly describe the work actually completed; do not imply unsupported outcomes
+---
 
-5. **Community & Achievements**
-   - **AWS Student Builder Campus Leader**
-     - Campus engagement around cloud technology, developer resources, and AWS Builder ecosystem
-   - **Google Student Ambassador**
-     - Community building, communication, and collaborative learning
-   - Use factual descriptions and avoid invented metrics
+## Page Content Approach
 
-6. **Creative Feature — Curiosity Terminal**
-   - An IDE/terminal-inspired interactive panel
-   - Visible hint: “Type `help` or choose a command to explore.”
-   - Commands:
-     - `help` — list available commands
-     - `superpower` — what drives my approach to technology
-     - `skills` — technical interests
-     - `projects` — projects being built
-     - `funfact` — unexpected personal detail
-     - `surprise` — reveal a random fact
-   - Provide clickable command chips/buttons as well as keyboard input
-   - Include clear output, prompt/cursor styling, and a reset/clear option
-   - Terminal must work on mobile and must not trap keyboard focus or block site navigation
-   - No backend or API required
+Every page starts from line 1 so it looks genuinely typed, like an open file in an editor.
 
-7. **What I Learned**
-   - Responsive web development
-   - JavaScript interactions
-   - GitHub workflow
-   - AWS Amplify deployment
-   - Balancing visual design, usability, and accessibility
-   - Communicating personal identity through a digital experience
+- Line numbers are generated by JavaScript and remain synchronised with content by scrolling as a single unit inside `.editor__body`.
+- Font size and line height are identical between `.line-num` and `.line` so every number maps to exactly one line.
+- The welcome page uses VS Code syntax-token colours (green comments, blue keywords, orange strings, amethyst braces) to present the introduction as actual JavaScript code.
 
-8. **Challenges & Problem Solving**
-   - Creating a personal visual identity rather than a template-like portfolio
-   - Making the interactive feature discoverable
-   - Responsive layout and interaction testing
-   - GitHub-to-Amplify deployment workflow
-   - Time management and prioritizing a complete experience
-   - Update this section with real challenges and fixes encountered during implementation
+---
 
-9. **Explore My Work / Contact**
-   - Live portfolio URL (add after deployment)
-   - Public GitHub repository (add after creation)
-   - LinkedIn and email links (use verified URLs only)
+## VS Code UI Components
 
-## Technical Requirements
+- **Activity bar** — left strip with Explorer icon and amethyst active indicator
+- **Sidebar** — Explorer panel with folder toggle and file list
+- **Tab bar** — open file tabs with close buttons; active tab has amethyst top border
+- **Editor area** — scrollable content with line numbers column
+- **Bottom panel** — VS Code-style terminal panel with tab strip, shell label badge, maximise/restore, close and drag-to-resize handle
+- **Status bar** — amethyst footer showing "VS Code, but it's my portfolio." on the left and "MADE WITH KIRO" on the right
+- **Floating terminal bubble** — fixed bottom-right circle button to toggle the terminal panel
 
-- Plain HTML, CSS, and vanilla JavaScript
-- No React, framework, package dependencies, backend, or build step
-- Files:
-  - `index.html`
-  - `styles.css`
-  - `script.js`
-  - `README.md`
-  - `assets/` (optimized images/icons, if needed)
-- Semantic HTML and accessible contrast
-- Responsive layout for desktop, tablet, and mobile
-- Keyboard-accessible navigation and terminal interactions
-- Respect reduced-motion preferences
-- Avoid broken links, placeholder content, fake statistics, or fabricated achievements
-- Optimize image sizes and loading performance
-- The site must work locally by opening `index.html`
+---
 
-## AWS & Deployment
+## Curiosity Terminal
 
-- Source code hosted in a public GitHub repository
-- AWS Amplify Hosting connected to the GitHub repository
-- Static site deployment; no backend services required
-- Verify the public HTTPS Amplify URL
-- Test deployed site, navigation, terminal commands, and responsive layout
-- Capture genuine screenshots of:
-  - Portfolio homepage
-  - Curiosity Terminal interaction
-  - AWS Amplify app/deployment status
-  - GitHub repository
+An interactive terminal panel at the bottom of the editor, matching VS Code's panel layout.
 
-**Deployment flow:** GitHub Repository → AWS Amplify Hosting → Public Portfolio URL
+**Available commands:**
+- `help` — Display available commands
+- `whoami` — Get to know Kaustubh
+- `skills` — Technical interests and tools
+- `projects` — Current and completed work
+- `experience` — Roles and responsibilities
+- `funfact` — Something unexpected
+- `surprise` — Rotating personal reveal (7 entries, cycles through)
+- `clear` — Clear terminal output
 
-## Submission Checklist
+**Interactions:**
+- Click command chips or type directly in the input
+- `Enter` to run a command
+- `↑` / `↓` to navigate history (last 40 commands)
+- `Tab` to autocomplete a partial command
+- `Escape` to blur input
+- Drag the top resize handle to adjust panel height
+- Maximise/restore button to expand to 70vh
 
-- [ ] Website completed and tested locally
-- [ ] Curiosity Terminal fully functional
-- [ ] Responsive desktop/mobile layouts checked
-- [ ] Public GitHub repository created
-- [ ] README added
-- [ ] AWS Amplify deployment successful
-- [ ] Live URL tested in a private/incognito window
-- [ ] Portfolio screenshots captured
-- [ ] AWS deployment screenshots captured
-- [ ] Project body updated with actual implementation and learning
-- [ ] GitHub repository URL added to submission
-- [ ] Live demo URL added to submission
-- [ ] At least five relevant tags selected
-- [ ] Submission reviewed and submitted
+---
+
+## Technical Stack
+
+| Layer | Detail |
+|---|---|
+| HTML | Semantic structure, ARIA labels, accessible roles |
+| CSS | Custom properties (design tokens), flexbox layout, responsive breakpoints, VS Code colour palette |
+| JavaScript | Navigation, tab management, line number generation, terminal logic |
+| Typography | JetBrains Mono via Google Fonts |
+| Version control | Git + GitHub |
+
+No frameworks. No package dependencies. No build step. Opens directly in a browser.
+
+---
+
+## Hosting & Deployment
+
+**GitHub Pages** — Actual public hosting used for the live submission preview.
+
+**AWS Amplify Hosting** — Original intended deployment target. AWS account suspension prevented completion of the Amplify hosting process before the submission deadline. The website was not successfully deployed to AWS Amplify.
+
+Do not claim AWS Amplify hosting in any visible content. The distinction is clearly documented in README.md.
+
+---
+
+## File Structure
+
+```
+kaustubh-portfolio/
+├── index.html      — Shell, sidebar, all page content, terminal panel
+├── styles.css      — Design system, layout, VS Code tokens, responsive
+├── script.js       — Navigation, tabs, line numbers, Curiosity Terminal
+├── README.md       — Full project documentation
+└── plan.md         — This file — planning and specification
+```
+
+---
 
 ## Content Accuracy Notes
 
-- Keep the student year as **third year** as specified by the project owner.
-- Keep Sahi Bin marked **in development** unless its status changes.
-- Do not claim AWS services or features that were not actually used.
-- Replace blank Live Portfolio and GitHub links after deployment.
-- Update the learning/challenges sections based on real work completed.
+- Student year: **third year** (2024–2028).
+- Sahi Bin: **in development** — do not mark as completed.
+- AWS Amplify: **not successfully deployed** — do not claim active AWS hosting.
+- All links use verified URLs from the project owner.
+- No private phone numbers displayed on the website.
+- Terminal command content matches the final website content.
+
+---
 
 ## Final Statement
 
-A person's technical identity is not defined only by a list of programming languages. It is shaped by the questions they ask, the problems they choose to solve, and the things they are curious enough to build.
+A person's technical identity is not defined only by a list of programming languages. It is shaped by the questions they ask, the problems they choose to solve and the things they are curious enough to build.
 
-**Welcome to KAUSTUBH.EXE!**
+**VS Code, but it's my portfolio.**

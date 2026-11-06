@@ -3,760 +3,565 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kaustubh Bhabal — BE AI & ML student, Lead at Forge – The Coding Club, Google Student Ambassador. Curiosity beats obsession." />
+  <meta name="description" content="VS Code, but it's my portfolio — Kaustubh Bhabal, AI & ML engineering student at Siddhant College of Engineering, Pune. Built for the AWS Student Builder Challenge." />
   <meta name="theme-color" content="#1e1e1e" />
-  <title>KAUSTUBH.EXE</title>
+  <title>VS Code, but it's my portfolio — Kaustubh Bhabal</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- Skip to main content -->
-  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#editor" class="skip-link">Skip to content</a>
 
-  <!-- ── ACTIVITY BAR (VS Code left strip) ─────────────────── -->
-  <aside class="activity-bar" aria-label="Activity bar" aria-hidden="true">
-    <div class="activity-bar__top">
-      <!-- Explorer icon -->
-      <button class="ab-icon ab-icon--active" title="Explorer" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 0h-9L7 1.5v5H2L0 8v14.5L1.5 24h13l1.5-1.5V18h4.8L22 16.5V6l-4.5-6zM16 6h-4V1.5l4 4.5zm0 15H2V8h5V6.5L8.5 5H16v16zm4.5-4.5H18V5.5l-3-3-1-1h.5L20 6v10.5z"/></svg>
-      </button>
-      <!-- Search icon -->
-      <button class="ab-icon" title="Search" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.25 0a8.25 8.25 0 0 0-6.18 13.72L1 22.88l1.12 1.12 8.06-8.06A8.25 8.25 0 1 0 15.25 0zm0 15a6.75 6.75 0 1 1 0-13.5 6.75 6.75 0 0 1 0 13.5z"/></svg>
-      </button>
-      <!-- Source control -->
-      <button class="ab-icon" title="Source Control" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 21a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10-18a2 2 0 1 1 4 0 2 2 0 0 1-4 0zM5 19.1A8 8 0 0 1 7.93 8.4l1.45 1.45A6 6 0 0 0 7 14.12V19zm14 0V5a2 2 0 0 0-4 0v14.1a6 6 0 0 0 0 11.8V21a2 2 0 0 0 4 0v-1.9z"/></svg>
-      </button>
-      <!-- Extensions -->
-      <button class="ab-icon" title="Extensions" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.875 9l-4.875-4.875v3H11V3.875L6.125 9 11 14.125V11h5v3L20.875 9zM14 0H10v4h4V0zm0 20h-4v4h4v-4zM4 10H0v4h4v-4zm16 0h-4v4h4v-4z"/></svg>
-      </button>
-    </div>
-    <div class="activity-bar__bottom">
-      <button class="ab-icon" title="Settings" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-      </button>
-    </div>
-  </aside>
+  <!-- ════════════════════════════════════════════════════════
+       VS CODE SHELL
+       ════════════════════════════════════════════════════════ -->
+  <div class="vscode-shell">
 
-  <!-- ── SIDEBAR (VS Code file explorer) ───────────────────── -->
-  <aside class="sidebar" aria-label="File explorer">
-    <div class="sidebar__title">EXPLORER</div>
-    <div class="sidebar__section">
-      <button class="sidebar__section-header" aria-expanded="true">
-        <svg class="sidebar__chevron" viewBox="0 0 16 16" fill="currentColor"><path d="M5.7 13.7L4.3 12.3 9.6 7 4.3 1.7 5.7.3l6.7 6.7z"/></svg>
-        KAUSTUBH.EXE
-      </button>
-      <ul class="sidebar__tree" role="list">
-        <li><a href="#hero" class="sidebar__file sidebar__file--active">
-          <svg class="file-icon file-icon--html" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 0l1.5 13 6 2 6-2 1.5-13H.5zm11.4 3H4.1l.2 2h7.4l-.6 5.5L8 11.5l-3.1-1-.2-1.8h1.9l.1 1 1.3.4 1.3-.4.2-2H4.7l-.6-5.2h7.6l-.3 2z"/></svg>
-          index.html
-        </a></li>
-        <li><a href="#superpowers" class="sidebar__file">
-          <svg class="file-icon file-icon--css" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 0l1.5 13 6 2 6-2 1.5-13H.5zm10.3 4.8l-.1 1.2H5.6l.2 1.6h4.7l-.3 2.8-2.2.6-2.2-.6-.1-1.3H7.5v.7l.7.2.7-.2.1-1.4H5.1l-.4-4.4h6.3l-.2 1.3z"/></svg>
-          styles.css
-        </a></li>
-        <li><a href="#terminal" class="sidebar__file">
-          <svg class="file-icon file-icon--js" viewBox="0 0 16 16" fill="currentColor"><path d="M0 0h16v16H0V0zm9 10.2c.2.9.9 1.5 2.1 1.5 1.4 0 2.1-.7 2.1-1.6 0-.9-.6-1.4-1.9-1.7l-.6-.2c-.6-.1-.8-.4-.8-.7 0-.4.3-.6.8-.6.5 0 .8.2.9.7l1.1-.3c-.2-.9-.9-1.4-2-1.4-1.2 0-1.9.7-1.9 1.6 0 .8.5 1.4 1.8 1.7l.6.2c.7.2.9.4.9.7 0 .4-.3.7-1 .7-.7 0-1.1-.3-1.2-.9L9 10.2zm-4.8.8c.2.3.5.5 1 .5.8 0 1.2-.4 1.2-1.5V6.4H5.3v3.6c0 .4-.1.5-.4.5-.2 0-.4-.1-.5-.4l-.8.9z"/></svg>
-          script.js
-        </a></li>
-        <li class="sidebar__group-label">SECTIONS</li>
-        <li><a href="#about" class="sidebar__file sidebar__file--indent">
-          <svg class="file-icon file-icon--md" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7.5V8.5l-2 2.63L3.5 8.5V11H2V5h1.5l2 3 2-3H9v6zm4.5 0l-2.5-3H13V5h1.5v3H16l-2.5 3z"/></svg>
-          about.md
-        </a></li>
-        <li><a href="#experience" class="sidebar__file sidebar__file--indent">
-          <svg class="file-icon file-icon--md" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7.5V8.5l-2 2.63L3.5 8.5V11H2V5h1.5l2 3 2-3H9v6zm4.5 0l-2.5-3H13V5h1.5v3H16l-2.5 3z"/></svg>
-          experience.md
-        </a></li>
-        <li><a href="#projects" class="sidebar__file sidebar__file--indent">
-          <svg class="file-icon file-icon--md" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7.5V8.5l-2 2.63L3.5 8.5V11H2V5h1.5l2 3 2-3H9v6zm4.5 0l-2.5-3H13V5h1.5v3H16l-2.5 3z"/></svg>
-          projects.md
-        </a></li>
-        <li><a href="#achievements" class="sidebar__file sidebar__file--indent">
-          <svg class="file-icon file-icon--md" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7.5V8.5l-2 2.63L3.5 8.5V11H2V5h1.5l2 3 2-3H9v6zm4.5 0l-2.5-3H13V5h1.5v3H16l-2.5 3z"/></svg>
-          achievements.md
-        </a></li>
-        <li><a href="#contact" class="sidebar__file sidebar__file--indent">
-          <svg class="file-icon file-icon--md" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7.5V8.5l-2 2.63L3.5 8.5V11H2V5h1.5l2 3 2-3H9v6zm4.5 0l-2.5-3H13V5h1.5v3H16l-2.5 3z"/></svg>
-          contact.md
-        </a></li>
-      </ul>
-    </div>
-    <div class="sidebar__section">
-      <button class="sidebar__section-header" aria-expanded="true">
-        <svg class="sidebar__chevron" viewBox="0 0 16 16" fill="currentColor"><path d="M5.7 13.7L4.3 12.3 9.6 7 4.3 1.7 5.7.3l6.7 6.7z"/></svg>
-        OUTLINE
-      </button>
-      <ul class="sidebar__tree sidebar__outline" role="list">
-        <li><a href="#hero" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--class">C</span>Hero
-        </a></li>
-        <li><a href="#about" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--fn">f</span>About
-        </a></li>
-        <li><a href="#experience" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--fn">f</span>Experience
-        </a></li>
-        <li><a href="#superpowers" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--fn">f</span>Superpowers
-        </a></li>
-        <li><a href="#projects" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--fn">f</span>Projects
-        </a></li>
-        <li><a href="#achievements" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--fn">f</span>Achievements
-        </a></li>
-        <li><a href="#terminal" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--var">v</span>Terminal
-        </a></li>
-        <li><a href="#contact" class="sidebar__symbol">
-          <span class="symbol-icon symbol-icon--var">v</span>Contact
-        </a></li>
-      </ul>
-    </div>
-  </aside>
+    <!-- ── ACTIVITY BAR ───────────────────────────────────── -->
+    <aside class="activity-bar" aria-label="Activity bar">
+      <div class="activity-bar__top">
+        <button class="ab-btn ab-btn--active" aria-label="Explorer" title="Explorer">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="22" height="22" aria-hidden="true">
+            <path d="M13.71 4.29l-3-3L10 1H4L3 2v12l1 1h9l1-1V5l-.29-.71zM13 14H4V2h5v4h4v8zm-3-9V2l3 3h-3z"/>
+          </svg>
+        </button>
+      </div>
+    </aside>
 
-  <!-- ── MAIN EDITOR AREA ──────────────────────────────────── -->
-  <div class="editor-area">
+    <!-- ── SIDEBAR ─────────────────────────────────────────── -->
+    <aside class="sidebar" aria-label="Explorer">
+      <div class="sidebar__title">EXPLORER</div>
 
-    <!-- Tab bar -->
-    <nav class="tab-bar" aria-label="Open files">
-      <a href="#hero"         class="tab tab--active" id="tab-hero">
-        <svg class="tab__icon tab__icon--html" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 0l1.5 13 6 2 6-2 1.5-13H.5zm11.4 3H4.1l.2 2h7.4l-.6 5.5L8 11.5l-3.1-1-.2-1.8h1.9l.1 1 1.3.4 1.3-.4.2-2H4.7l-.6-5.2h7.6l-.3 2z"/></svg>
-        index.html
-        <span class="tab__close" aria-hidden="true">×</span>
-      </a>
-      <a href="#terminal"     class="tab" id="tab-terminal">
-        <svg class="tab__icon tab__icon--js" viewBox="0 0 16 16" fill="currentColor"><path d="M0 0h16v16H0V0zm9 10.2c.2.9.9 1.5 2.1 1.5 1.4 0 2.1-.7 2.1-1.6 0-.9-.6-1.4-1.9-1.7l-.6-.2c-.6-.1-.8-.4-.8-.7 0-.4.3-.6.8-.6.5 0 .8.2.9.7l1.1-.3c-.2-.9-.9-1.4-2-1.4-1.2 0-1.9.7-1.9 1.6 0 .8.5 1.4 1.8 1.7l.6.2c.7.2.9.4.9.7 0 .4-.3.7-1 .7-.7 0-1.1-.3-1.2-.9L9 10.2zm-4.8.8c.2.3.5.5 1 .5.8 0 1.2-.4 1.2-1.5V6.4H5.3v3.6c0 .4-.1.5-.4.5-.2 0-.4-.1-.5-.4l-.8.9z"/></svg>
-        terminal.js <span class="tab__dot" aria-hidden="true"></span>
-        <span class="tab__close" aria-hidden="true">×</span>
-      </a>
-      <a href="#contact"      class="tab" id="tab-contact">
-        <svg class="tab__icon tab__icon--css" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 0l1.5 13 6 2 6-2 1.5-13H.5zm10.3 4.8l-.1 1.2H5.6l.2 1.6h4.7l-.3 2.8-2.2.6-2.2-.6-.1-1.3H7.5v.7l.7.2.7-.2.1-1.4H5.1l-.4-4.4h6.3l-.2 1.3z"/></svg>
-        contact.css
-        <span class="tab__close" aria-hidden="true">×</span>
-      </a>
-    </nav>
+      <div class="sidebar__folder">
+        <button class="sidebar__folder-btn" id="folderToggle" aria-expanded="true" aria-controls="fileList">
+          <svg class="sidebar__chevron" viewBox="0 0 16 16" fill="currentColor" width="10" height="10" aria-hidden="true">
+            <path d="M5.7 13.7L4.3 12.3 9.6 7 4.3 1.7 5.7.3l6.7 6.7z"/>
+          </svg>
+          KAUSTUBH BHABAL
+        </button>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb" aria-label="Breadcrumb">
-      <span class="breadcrumb__item">kaustubh-portfolio</span>
-      <span class="breadcrumb__sep" aria-hidden="true">›</span>
-      <span class="breadcrumb__item breadcrumb__item--active" id="breadcrumb-current">index.html</span>
-      <span class="breadcrumb__sep" aria-hidden="true">›</span>
-      <span class="breadcrumb__item breadcrumb__item--symbol" id="breadcrumb-symbol">Hero</span>
-    </div>
-
-    <!-- ── SCROLLABLE CONTENT ─────────────────────────────── -->
-    <main id="main" class="editor-content">
-
-      <!-- ── HERO ─────────────────────────────────────────── -->
-      <section id="hero" class="section hero" aria-label="Introduction">
-        <div class="line-numbers" aria-hidden="true">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-          <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-        </div>
-        <div class="hero__inner">
-          <div class="hero__eyebrow">
-            <span class="token token--comment">// KAUSTUBH.EXE · portfolio.init()</span>
-          </div>
-          <h1 class="hero__name">
-            <span class="token token--keyword">const </span><span class="token token--var">name</span>
-            <span class="token token--op"> = </span>
-            <span class="token token--string">"<span class="hero__name-highlight">Kaustubh Bhabal</span>"</span><span class="token token--punct">;</span>
-          </h1>
-          <p class="hero__role">
-            <span class="token token--keyword">const </span><span class="token token--var">role</span>
-            <span class="token token--op"> = </span>
-            <span class="token token--string">"BE AI &amp; ML · Lead @ Forge · Google Ambassador"</span><span class="token token--punct">;</span>
-          </p>
-          <p class="hero__tagline">
-            <span class="token token--comment">// Curiosity beats obsession.</span>
-          </p>
-          <div class="hero__actions">
-            <a href="#projects"  class="btn btn--primary">View Projects</a>
-            <a href="#terminal"  class="btn btn--ghost">Open Terminal</a>
-            <a href="#contact"   class="btn btn--ghost">Contact Me</a>
-          </div>
-          <div class="hero__social">
-            <a href="https://github.com/kauongit" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub profile">
-              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              kauongit
-            </a>
-            <a href="https://www.linkedin.com/in/sprclfrglstcxpldcs/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn profile">
-              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              LinkedIn
-            </a>
-            <a href="mailto:alwaysinrange007@gmail.com" class="social-link" aria-label="Email">
-              <svg class="social-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Email
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── ABOUT ─────────────────────────────────────────── -->
-      <section id="about" class="section" aria-labelledby="about-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── About Me ─────────────────────── */</span>
-          <h2 class="section__title" id="about-heading">
-            <span class="token token--keyword">function </span><span class="token token--fn">about</span><span class="token token--punct">()</span> <span class="token token--brace">{</span>
-          </h2>
-        </div>
-        <div class="about__layout">
-          <div class="about__text code-block">
-            <p class="about__lead">
-              <span class="token token--keyword">return </span><span class="token token--string">"</span>A blend of curiosity, imagination, and perseverance.<span class="token token--string">"</span>
-            </p>
-            <p>I'm pragmatic and considerate — it helps me solve problems logically while understanding other people's perspectives. I enjoy being open to trying new things that make me a better individual.</p>
-            <p>An animal lover, introvert, and someone who finds art to be a field of genuine interest. I want to put some light on creativity through upcoming projects.</p>
-            <p>I'm a responsible person, especially in a team — I try my best to contribute and be genuinely helpful. Right now I'm studying BE in AI &amp; ML at Siddhant College of Engineering, Pune, and leading <strong class="hl">Forge — The Coding Club</strong>.</p>
-          </div>
-          <div class="about__meta">
-            <div class="meta-card">
-              <div class="meta-card__item">
-                <span class="meta-card__label">name</span>
-                <span class="meta-card__value token token--string">"Kaustubh Bhabal"</span>
-              </div>
-              <div class="meta-card__item">
-                <span class="meta-card__label">degree</span>
-                <span class="meta-card__value token token--string">"BE, AI &amp; ML (2024–2028)"</span>
-              </div>
-              <div class="meta-card__item">
-                <span class="meta-card__label">college</span>
-                <span class="meta-card__value token token--string">"Siddhant CoE, Pune"</span>
-              </div>
-              <div class="meta-card__item">
-                <span class="meta-card__label">location</span>
-                <span class="meta-card__value token token--string">"Pune, Maharashtra, India"</span>
-              </div>
-              <div class="meta-card__item">
-                <span class="meta-card__label">status</span>
-                <span class="meta-card__value status-active">actively_building</span>
-              </div>
-            </div>
-            <div class="meta-card meta-card--lang">
-              <div class="meta-card__subtitle token token--comment">// languages spoken</div>
-              <div class="lang-list">
-                <div class="lang-item"><span class="lang-name">Marathi</span><span class="lang-level lang-level--native">Native</span></div>
-                <div class="lang-item"><span class="lang-name">Hindi</span><span class="lang-level lang-level--pro">Professional</span></div>
-                <div class="lang-item"><span class="lang-name">English</span><span class="lang-level lang-level--pro">Full Professional</span></div>
-                <div class="lang-item"><span class="lang-name">Japanese</span><span class="lang-level lang-level--elem">Elementary</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section__close"><span class="token token--brace">}</span></div>
-      </section>
-
-      <!-- ── EXPERIENCE ─────────────────────────────────────── -->
-      <section id="experience" class="section" aria-labelledby="exp-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Experience ───────────────────── */</span>
-          <h2 class="section__title" id="exp-heading">
-            <span class="token token--keyword">const </span><span class="token token--var">experience</span>
-            <span class="token token--op"> = </span><span class="token token--brace">[</span>
-          </h2>
-        </div>
-        <div class="timeline">
-
-          <article class="timeline-item timeline-item--current" aria-label="Lead at Forge">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--current">Current</span>
-                <span class="timeline-item__date">Aug 2026 – Present</span>
-              </div>
-              <h3 class="timeline-item__title">Lead</h3>
-              <p class="timeline-item__org">Forge – The Coding Club</p>
-              <p class="timeline-item__desc">Leading the college coding club — organising technical sessions, mentoring members, and building a community where students actually build things.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item timeline-item--current" aria-label="Google Student Ambassador">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--current">Current</span>
-                <span class="timeline-item__date">May 2026 – Present</span>
-              </div>
-              <h3 class="timeline-item__title">Ambassador</h3>
-              <p class="timeline-item__org">Google Student Ambassadors (India)</p>
-              <p class="timeline-item__desc">Community building, collaborative learning, and bridging the gap between Google developer tools and real student projects. Focused on peer-to-peer knowledge sharing.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item timeline-item--current" aria-label="NSS Volunteer">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--current">Current</span>
-                <span class="timeline-item__date">Jun 2025 – Present</span>
-              </div>
-              <h3 class="timeline-item__title">NSS Volunteer</h3>
-              <p class="timeline-item__org">Siddhant College of Engineering</p>
-              <p class="timeline-item__desc">Active participation in National Service Scheme activities — community service, awareness drives, and campus social initiatives.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item" aria-label="AI Speech Data Contributor at Shaip">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--done">Completed</span>
-                <span class="timeline-item__date">Jul 2026 – Aug 2026</span>
-              </div>
-              <h3 class="timeline-item__title">AI Speech Data Contributor</h3>
-              <p class="timeline-item__org">Shaip</p>
-              <p class="timeline-item__desc">Contributed to speech data collection and annotation pipelines used for training AI/ML language models.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item" aria-label="Technical Head at ABVP SCOE">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--done">Completed</span>
-                <span class="timeline-item__date">Nov 2025 – Jul 2026 · 9 months</span>
-              </div>
-              <h3 class="timeline-item__title">Technical Head</h3>
-              <p class="timeline-item__org">ABVP – SCOE</p>
-              <p class="timeline-item__desc">Planned, organised, and executed technical events with a positive learning impact across schools and colleges. Managed event operations, organised teams, ensured smooth technical execution, and encouraged innovation-driven activities that enhanced student engagement.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item" aria-label="Marketing Intern at Eduveda Academy">
-            <div class="timeline-item__dot" aria-hidden="true"></div>
-            <div class="timeline-item__body">
-              <div class="timeline-item__meta">
-                <span class="status-badge status-badge--done">Completed</span>
-                <span class="timeline-item__date">Jan 2026 – Mar 2026 · 3 months</span>
-              </div>
-              <h3 class="timeline-item__title">Marketing Intern</h3>
-              <p class="timeline-item__org">Eduveda Academy</p>
-              <p class="timeline-item__desc">Supported marketing operations at an education-focused organisation — content, outreach, and communication work.</p>
-            </div>
-          </article>
-
-        </div>
-        <div class="section__close"><span class="token token--brace">]</span><span class="token token--punct">;</span></div>
-      </section>
-
-      <!-- ── TECH SUPERPOWERS ───────────────────────────────── -->
-      <section id="superpowers" class="section" aria-labelledby="superpowers-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Tech Superpowers ─────────────── */</span>
-          <h2 class="section__title" id="superpowers-heading">
-            <span class="token token--keyword">const </span><span class="token token--var">skills</span>
-            <span class="token token--op"> = </span><span class="token token--brace">{</span>
-          </h2>
-        </div>
-        <div class="superpowers__grid">
-
-          <article class="power-card" aria-label="Web Development">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">web</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
-            </div>
-            <p class="power-card__desc">Responsive interfaces built from scratch — semantic, accessible, no frameworks.</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li>
-            </ul>
-          </article>
-
-          <article class="power-card" aria-label="App Development">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">appDev</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-            </div>
-            <p class="power-card__desc">Cross-platform mobile apps with real-time backends and on-device intelligence.</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">Flutter</li><li class="tag">Firebase</li><li class="tag">Dart</li>
-            </ul>
-          </article>
-
-          <article class="power-card" aria-label="AI and ML">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">aiMl</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            </div>
-            <p class="power-card__desc">Model training fundamentals, on-device inference via ML Kit, AI speech data work at Shaip.</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">ML Fundamentals</li><li class="tag">Google ML Kit</li>
-            </ul>
-          </article>
-
-          <article class="power-card" aria-label="Robotics">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">robotics</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="10" width="10" height="8" rx="1"/><path d="M12 10V7m-3 3V8a3 3 0 116 0v2M9 14h.01M15 14h.01"/><circle cx="12" cy="5" r="1"/></svg>
-            </div>
-            <p class="power-card__desc">Simulation environments, embedded microcontrollers, bridging physical and digital systems.</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">CoppeliaSim</li><li class="tag">Arduino</li><li class="tag">ESP32</li>
-            </ul>
-          </article>
-
-          <article class="power-card" aria-label="Creative & Design">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">design</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-            </div>
-            <p class="power-card__desc">UI/UX design, visual identity, product thinking, and communicating ideas through screens.</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">Figma</li><li class="tag">Canva</li><li class="tag">Stitch</li>
-            </ul>
-          </article>
-
-          <article class="power-card" aria-label="Cloud & Productivity">
-            <div class="power-card__header">
-              <span class="power-card__key token token--prop">cloud</span><span class="token token--punct">:</span>
-            </div>
-            <div class="power-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-            </div>
-            <p class="power-card__desc">Static hosting, CI/CD pipelines, AWS Amplify — and certified in Microsoft Excel (From Zero to Hero).</p>
-            <ul class="power-card__tags" role="list">
-              <li class="tag">AWS Amplify</li><li class="tag">GitHub</li><li class="tag">MS Excel</li>
-            </ul>
-          </article>
-
-        </div>
-        <div class="section__close"><span class="token token--brace">}</span><span class="token token--punct">;</span></div>
-      </section>
-
-      <!-- ── PROJECTS ────────────────────────────────────────── -->
-      <section id="projects" class="section" aria-labelledby="projects-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Selected Projects ────────────── */</span>
-          <h2 class="section__title" id="projects-heading">
-            <span class="token token--keyword">const </span><span class="token token--var">projects</span>
-            <span class="token token--op"> = </span><span class="token token--brace">[</span>
-          </h2>
-        </div>
-        <div class="projects__grid">
-
-          <article class="project-card project-card--featured" aria-label="Sahi Bin project">
-            <div class="project-card__header">
-              <div class="project-card__meta">
-                <span class="status-badge status-badge--dev">In Development</span>
-                <span class="project-card__year">2024–25</span>
-              </div>
-              <h3 class="project-card__title">Sahi Bin</h3>
-              <p class="project-card__subtitle">Smart Waste Segregation System</p>
-            </div>
-            <p class="project-card__desc">A Flutter application for better waste management — role-based workflows for citizens, workers, and admins. Uses on-device image recognition via Google ML Kit to classify waste without a cloud round-trip per scan.</p>
-            <div class="project-card__detail">
-              <span class="project-card__detail-label">// working on:</span>
-              Multi-role auth flows, ML image classification pipeline, real-time Firestore sync.
-            </div>
-            <ul class="project-card__stack" role="list">
-              <li class="tag">Flutter</li><li class="tag">Firebase</li><li class="tag">Google ML Kit</li><li class="tag">Dart</li>
-            </ul>
-          </article>
-
-          <article class="project-card" aria-label="Pritha project">
-            <div class="project-card__header">
-              <div class="project-card__meta">
-                <span class="status-badge status-badge--design">Design Concept</span>
-                <span class="project-card__year">2024</span>
-              </div>
-              <h3 class="project-card__title">Pritha</h3>
-              <p class="project-card__subtitle">Nutrition &amp; Wellness Platform</p>
-            </div>
-            <p class="project-card__desc">A UI/UX concept exploring what a calm, accessible wellness app could feel like. Focus on product thinking — defining user flows, visual identity, and an experience that doesn't feel clinical or overwhelming.</p>
-            <div class="project-card__detail">
-              <span class="project-card__detail-label">// focus areas:</span>
-              Visual identity, information architecture, accessible colour systems, Figma wireframes.
-            </div>
-            <ul class="project-card__stack" role="list">
-              <li class="tag">Figma</li><li class="tag">UI Design</li><li class="tag">Product Thinking</li>
-            </ul>
-          </article>
-
-          <article class="project-card" aria-label="Robotics Simulation project">
-            <div class="project-card__header">
-              <div class="project-card__meta">
-                <span class="status-badge status-badge--done">Completed</span>
-                <span class="project-card__year">2024</span>
-              </div>
-              <h3 class="project-card__title">Robotics Simulation</h3>
-              <p class="project-card__subtitle">Lam Research Challenge 2024</p>
-            </div>
-            <p class="project-card__desc">Collaborative robotics simulation for the Lam Research Challenge — designing and simulating robotic arm behaviour in CoppeliaSim, working through inverse kinematics, path planning, and team coordination.</p>
-            <div class="project-card__detail">
-              <span class="project-card__detail-label">// what it involved:</span>
-              CoppeliaSim simulation, robot motion scripting, collaborative engineering under time constraints.
-            </div>
-            <ul class="project-card__stack" role="list">
-              <li class="tag">CoppeliaSim</li><li class="tag">Robotics</li><li class="tag">Simulation</li>
-            </ul>
-          </article>
-
-        </div>
-        <div class="section__close"><span class="token token--brace">]</span><span class="token token--punct">;</span></div>
-      </section>
-
-      <!-- ── ACHIEVEMENTS ───────────────────────────────────── -->
-      <section id="achievements" class="section" aria-labelledby="achievements-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Achievements & Community ─────── */</span>
-          <h2 class="section__title" id="achievements-heading">
-            <span class="token token--keyword">const </span><span class="token token--var">achievements</span>
-            <span class="token token--op"> = </span><span class="token token--brace">[</span>
-          </h2>
-        </div>
-        <div class="achievements__grid">
-
-          <article class="achievement-card" aria-label="Lead at Forge">
-            <div class="achievement-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <div class="achievement-card__body">
-              <h3 class="achievement-card__title">Lead — Forge, The Coding Club</h3>
-              <p class="achievement-card__org">Siddhant College of Engineering · Aug 2026–Present</p>
-              <p class="achievement-card__desc">Building a coding culture from the inside — organising technical sessions, supporting members' first projects, and making the club a place where curiosity is the entry requirement.</p>
-            </div>
-          </article>
-
-          <article class="achievement-card" aria-label="Google Student Ambassador">
-            <div class="achievement-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
-            </div>
-            <div class="achievement-card__body">
-              <h3 class="achievement-card__title">Google Student Ambassador</h3>
-              <p class="achievement-card__org">Google Student Ambassadors India · May 2026–Present</p>
-              <p class="achievement-card__desc">Community engagement, collaborative learning, and bridging Google developer tools with real student projects on campus.</p>
-            </div>
-          </article>
-
-          <article class="achievement-card" aria-label="Technical Head ABVP SCOE">
-            <div class="achievement-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
-            <div class="achievement-card__body">
-              <h3 class="achievement-card__title">Technical Head</h3>
-              <p class="achievement-card__org">ABVP – SCOE · Nov 2025 – Jul 2026</p>
-              <p class="achievement-card__desc">Planned and executed technical events impacting students across schools and colleges. Managed teams, ensured smooth execution, and drove innovation-focused activities.</p>
-            </div>
-          </article>
-
-          <article class="achievement-card" aria-label="NSS Volunteer">
-            <div class="achievement-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-            <div class="achievement-card__body">
-              <h3 class="achievement-card__title">NSS Volunteer</h3>
-              <p class="achievement-card__org">Siddhant College of Engineering · Jun 2025–Present</p>
-              <p class="achievement-card__desc">Active participation in National Service Scheme — community service programmes, awareness initiatives, and campus social responsibility activities.</p>
-            </div>
-          </article>
-
-          <article class="achievement-card" aria-label="Microsoft Excel Certification">
-            <div class="achievement-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-            </div>
-            <div class="achievement-card__body">
-              <h3 class="achievement-card__title">Certified: Microsoft Excel</h3>
-              <p class="achievement-card__org">Learn Microsoft Excel: From Zero to Hero</p>
-              <p class="achievement-card__desc">Completed a structured Excel certification course covering data management, formulas, and spreadsheet workflows from fundamentals to advanced usage.</p>
-            </div>
-          </article>
-
-        </div>
-        <div class="section__close"><span class="token token--brace">]</span><span class="token token--punct">;</span></div>
-      </section>
-
-      <!-- ── CURIOSITY TERMINAL ─────────────────────────────── -->
-      <section id="terminal" class="section terminal-section" aria-labelledby="terminal-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Curiosity Terminal ───────────── */</span>
-          <h2 class="section__title" id="terminal-heading">
-            <span class="token token--fn">CuriosityTerminal</span><span class="token token--punct">()</span>
-          </h2>
-          <p class="section__subtitle token token--comment">// Type a command or click a chip below to explore.</p>
-        </div>
-
-        <div class="terminal" role="region" aria-label="Interactive curiosity terminal">
-          <!-- Titlebar -->
-          <div class="terminal__titlebar" aria-hidden="true">
-            <div class="terminal__dots">
-              <span class="terminal__dot terminal__dot--red"></span>
-              <span class="terminal__dot terminal__dot--yellow"></span>
-              <span class="terminal__dot terminal__dot--green"></span>
-            </div>
-            <span class="terminal__tab terminal__tab--active">
-              <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13"><path d="M1 3h14v1H1V3zm0 3h14v1H1V6zm0 3h14v1H1V9zm0 3h7v1H1v-1z"/></svg>
-              zsh — kaustubh@portfolio
-            </span>
-            <span class="terminal__tab">
-              <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13"><path d="M1 3h14v1H1V3zm0 3h14v1H1V6zm0 3h14v1H1V9zm0 3h7v1H1v-1z"/></svg>
-              bash
-            </span>
-            <div class="terminal__actions">
-              <button class="terminal__action-btn" title="Split terminal" tabindex="-1" aria-hidden="true">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M8 1v14H7V1h1zm6 0v14h-1V1h1zM1 1v14H0V1h1z"/></svg>
-              </button>
-              <button class="terminal__clear-btn" id="terminalClearBtn" aria-label="Clear terminal">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M10 3H9V2H3v1H2v10h1v1h6v-1h1V3zm-1 10H3V4h6v9z"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Hint banner -->
-          <div class="terminal__hint">
-            <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.5 10.5h-1v-5h1v5zm0-6.5h-1V4h1v1z"/></svg>
-            Type <kbd>help</kbd> to list commands · use <kbd>↑↓</kbd> for history · <kbd>Tab</kbd> to autocomplete
-          </div>
-
-          <!-- Quick chips -->
-          <div class="terminal__chips" role="group" aria-label="Quick commands">
-            <button class="chip" data-cmd="help">help</button>
-            <button class="chip" data-cmd="whoami">whoami</button>
-            <button class="chip" data-cmd="superpower">superpower</button>
-            <button class="chip" data-cmd="skills">skills</button>
-            <button class="chip" data-cmd="projects">projects</button>
-            <button class="chip" data-cmd="experience">experience</button>
-            <button class="chip" data-cmd="funfact">funfact</button>
-            <button class="chip" data-cmd="surprise">surprise</button>
-          </div>
-
-          <!-- Output -->
-          <div class="terminal__output" id="terminalOutput" aria-live="polite" aria-atomic="false" aria-label="Terminal output">
-            <div class="terminal__boot">
-              <p><span class="t-accent">KAUSTUBH.EXE</span> <span class="t-dim">v2.0.0 — boot sequence complete.</span></p>
-              <p class="t-dim">Type <span class="t-accent">help</span> or click a command chip above.</p>
-            </div>
-          </div>
-
-          <!-- Input -->
-          <div class="terminal__input-row">
-            <span class="terminal__ps1" aria-hidden="true">
-              <span class="ps1-user">kaustubh</span><span class="ps1-sep">@</span><span class="ps1-host">portfolio</span><span class="ps1-sep">:</span><span class="ps1-dir">~</span><span class="ps1-dollar">$</span>
-            </span>
-            <input
-              type="text" id="terminalInput" class="terminal__input"
-              placeholder="type a command…"
-              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-              aria-label="Terminal input"
-            />
-            <button class="terminal__run-btn" id="terminalRunBtn" aria-label="Run command">
-              <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M4 2l10 6-10 6V2z"/></svg>
+        <ul class="sidebar__files" id="fileList" role="list">
+          <li>
+            <button class="sidebar__file" data-page="welcome" aria-label="Open Welcome">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              welcome
             </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="about" aria-label="Open About">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              about
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="experience" aria-label="Open Experience">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              experience
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="projects" aria-label="Open Projects">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              projects
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="skills" aria-label="Open Skills">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              skills
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="achievements" aria-label="Open Achievements">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              achievements
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__file" data-page="contact" aria-label="Open Contact">
+              <svg class="sidebar__file-icon" viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 1H4L3 2v12l1 1h8l1-1V2l-1-1zm0 13H4V2h8v12z"/></svg>
+              contact
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ── EDITOR COLUMN ───────────────────────────────────── -->
+    <div class="editor-column">
+
+      <!-- Tab bar -->
+      <div class="tab-bar" id="tabBar" role="tablist" aria-label="Open files">
+        <!-- Tabs injected by JS -->
+      </div>
+
+      <!-- Editor area -->
+      <main class="editor" id="editor" role="main">
+
+        <!-- ══ PAGE: WELCOME ════════════════════════════════ -->
+        <article class="page page--active" id="page-welcome" role="tabpanel" aria-label="Welcome">
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="welcome-layout">
+
+                <!-- Left: text content -->
+                <div class="content-block">
+                  <p class="line"><span class="ln-name">Kaustubh Bhabal</span></p>
+                  <p class="line line--dim">Lead at Forge — The Coding Club</p>
+                  <p class="line line--blank">&nbsp;</p>
+                  <p class="line line--dim">Pune, Maharashtra, India</p>
+                  <p class="line line--blank">&nbsp;</p>
+                  <p class="line">Currently a third-year student pursuing a Bachelor of</p>
+                  <p class="line">Engineering in Artificial Intelligence and Machine</p>
+                  <p class="line">Learning at Siddhant College of Engineering, Pune.</p>
+                  <p class="line line--blank">&nbsp;</p>
+                  <p class="line">A blend of curiosity, imagination, and perseverance.</p>
+                  <p class="line">Open to trying new things that make me a better</p>
+                  <p class="line">individual. Pragmatic and considerate — helps me</p>
+                  <p class="line">solve problems logically while understanding other</p>
+                  <p class="line">people's perspectives.</p>
+                  <p class="line line--blank">&nbsp;</p>
+                  <p class="line">An animal lover, introvert, and someone who finds art</p>
+                  <p class="line">to be a genuine field of interest.</p>
+                  <p class="line line--blank">&nbsp;</p>
+                  <p class="line line--dim">Built for the AWS Student Builder Challenge:</p>
+                  <p class="line line--dim">Build Your Tech Superpower.</p>
+                </div>
+
+                <!-- Right: cat — click opens terminal -->
+                <button class="welcome-cat-btn" id="termToggle"
+                  aria-label="Open Curiosity Terminal"
+                  title="Click to open the Curiosity Terminal">
+                  <img src="cat.jpg" alt="Cool cat with sunglasses" class="welcome-cat-img" />
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: ABOUT ══════════════════════════════════ -->
+        <article class="page" id="page-about" role="tabpanel" aria-label="About" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">About Me</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">I'm an engineering student who enjoys exploring beyond</p>
+                <p class="line">the conventional classroom experience</p>
+                <p class="line line--dim">(well, I don't always go beyond... iykyk lol).</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">My interests span across:</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  Artificial Intelligence and Machine Learning</p>
+                <p class="line">  →  Robotics and embedded systems</p>
+                <p class="line">  →  Application development</p>
+                <p class="line">  →  Graphic design</p>
+                <p class="line">  →  UI/UX design</p>
+                <p class="line">  →  Technology communities</p>
+                <p class="line">  →  Philosophy and experimentation</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--dim">Basically, I'm interested in the intersection of</p>
+                <p class="line line--dim">hardware, software and creativity.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Education</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">2024 – 2028   Bachelor of Engineering</p>
+                <p class="line">              Artificial Intelligence &amp; Machine Learning</p>
+                <p class="line">              Siddhant College of Engineering, Pune</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">2021 – 2024   Higher Secondary Certificate — Science</p>
+                <p class="line">              ASM Geetamata English ACS Junior College</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">2010 – 2021   Secondary School Certificate</p>
+                <p class="line">              Alphonsa High School</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Languages</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Marathi    Native / Bilingual</p>
+                <p class="line">Hindi      Professional Working</p>
+                <p class="line">English    Full Professional</p>
+                <p class="line">Japanese   Elementary</p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: EXPERIENCE ═════════════════════════════ -->
+        <article class="page" id="page-experience" role="tabpanel" aria-label="Experience" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">Experience</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">AWS Student Builder Campus Leader</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Participated in the AWS Student Builder Campus Leader</p>
+                <p class="line">program, working on introducing students to cloud</p>
+                <p class="line">technology, developer resources and the AWS Builder</p>
+                <p class="line">ecosystem. The experience involved student engagement,</p>
+                <p class="line">community building and encouraging more students to</p>
+                <p class="line">explore AWS.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Lead — Forge, The Coding Club</p>
+                <p class="line line--date">August 2026 – Present   ·   Maharashtra, India</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Leading the college coding club, organising technical</p>
+                <p class="line">sessions, supporting members and creating an environment</p>
+                <p class="line">where students can learn by building things.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Google Student Ambassador</p>
+                <p class="line line--date">May 2026 – Present   ·   Google Student Ambassadors India</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Exploring community building, collaborative learning</p>
+                <p class="line">and introducing students to Google developer tools</p>
+                <p class="line">through campus engagement and peer-to-peer knowledge</p>
+                <p class="line">sharing.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Technical Head — ABVP, SCOE</p>
+                <p class="line line--date">November 2025 – July 2026   ·   9 months</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Planned and executed technical events with a focus on</p>
+                <p class="line">student engagement and learning across schools and</p>
+                <p class="line">colleges. Managed event operations, coordinated teams</p>
+                <p class="line">and supported technical execution.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">NSS Volunteer — Siddhant College of Engineering</p>
+                <p class="line line--date">June 2025 – Present   ·   1 year 6 months</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Participating in community service programmes, awareness</p>
+                <p class="line">initiatives and campus social activities through the</p>
+                <p class="line">National Service Scheme.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">AI Speech Data Contributor — Shaip</p>
+                <p class="line line--date">July 2026 – August 2026   ·   2 months</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Contributed speech data to AI training-related workflows,</p>
+                <p class="line">gaining exposure to how data supports the development</p>
+                <p class="line">of AI systems.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Marketing Intern — Eduveda Academy</p>
+                <p class="line line--date">January 2026 – March 2026   ·   3 months</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Supported marketing operations through content creation,</p>
+                <p class="line">outreach and communication activities.</p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: PROJECTS ═══════════════════════════════ -->
+        <article class="page" id="page-projects" role="tabpanel" aria-label="Projects" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">Projects</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Sahi Bin — Smart Waste Segregation</p>
+                <p class="line line--tag">Status: In Development</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">An intelligent waste segregation ecosystem designed</p>
+                <p class="line">around citizen participation, waste-worker workflows</p>
+                <p class="line">and administrative monitoring.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Focus areas:</p>
+                <p class="line">  →  Role-based workflows for citizens, workers and admins</p>
+                <p class="line">  →  On-device image recognition for waste classification</p>
+                <p class="line">  →  Multi-role authentication</p>
+                <p class="line">  →  Real-time communication and database synchronisation</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Built with   Flutter  ·  Dart  ·  Firebase  ·  Google ML Kit</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Pritha — Nutrition &amp; Wellness Platform</p>
+                <p class="line line--tag">Status: Design Concept</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">A product design concept for a nutrition and wellness</p>
+                <p class="line">application focused on creating a calm, accessible and</p>
+                <p class="line">user-friendly digital experience.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">The project explores how thoughtful design can make a</p>
+                <p class="line">wellness app feel welcoming rather than clinical.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Focus areas:</p>
+                <p class="line">  →  UI/UX design and product thinking</p>
+                <p class="line">  →  User flows and information architecture</p>
+                <p class="line">  →  Visual identity</p>
+                <p class="line">  →  Accessible colour systems</p>
+                <p class="line">  →  Screen-by-screen wireframing</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Built with   Figma  ·  Digital design tools</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Robotics Simulation — Lam Research Challenge 2024</p>
+                <p class="line line--tag">Status: Completed</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Collaborative robotics simulation work undertaken as</p>
+                <p class="line">part of the Lam Research Challenge.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Focus areas:</p>
+                <p class="line">  →  Robotics simulation</p>
+                <p class="line">  →  Inverse kinematics</p>
+                <p class="line">  →  Path planning</p>
+                <p class="line">  →  Team coordination and collaborative engineering</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Built with   CoppeliaSim</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Source Code</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line"><a href="https://github.com/kauongit/AWS-Student-Builder-Challenge-Build-Your-Tech-Superpower-Submission" target="_blank" rel="noopener noreferrer" class="ln-link ln-link--prominent">View Source Code on GitHub →</a></p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: SKILLS ═════════════════════════════════ -->
+        <article class="page" id="page-skills" role="tabpanel" aria-label="Skills" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">Skills</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--dim">I've explored these technologies through projects,</p>
+                <p class="line line--dim">coursework and plenty of random experimentation.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Web Development</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  HTML</p>
+                <p class="line">  →  CSS</p>
+                <p class="line">  →  JavaScript</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Application Development</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  Flutter</p>
+                <p class="line">  →  Dart</p>
+                <p class="line">  →  Firebase</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">AI &amp; Machine Learning</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  AI/ML fundamentals</p>
+                <p class="line">  →  Model training</p>
+                <p class="line">  →  Google ML Kit</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Robotics &amp; Simulation</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  CoppeliaSim</p>
+                <p class="line">  →  Arduino</p>
+                <p class="line">  →  ESP32</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Design &amp; Creative Tools</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  Figma</p>
+                <p class="line">  →  Stitch</p>
+                <p class="line">  →  Canva</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Other Tools</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">  →  GitHub</p>
+                <p class="line">  →  Microsoft Excel</p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: ACHIEVEMENTS ═══════════════════════════ -->
+        <article class="page" id="page-achievements" role="tabpanel" aria-label="Achievements" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">Achievements &amp; Community</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">AWS Student Builder Campus Leader</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Campus engagement around cloud technology, developer</p>
+                <p class="line">resources and the AWS Builder ecosystem.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Google Student Ambassador</p>
+                <p class="line line--date">May 2026 – Present   ·   Google Student Ambassadors India</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Community building, collaborative learning and bridging</p>
+                <p class="line">Google developer tools with real student projects.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Lead — Forge, The Coding Club</p>
+                <p class="line line--date">August 2026 – Present</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Building a coding culture from the inside — organising</p>
+                <p class="line">sessions, supporting members' first projects and making</p>
+                <p class="line">the club a place where curiosity is the only entry</p>
+                <p class="line">requirement.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Technical Head — ABVP, SCOE</p>
+                <p class="line line--date">November 2025 – July 2026   ·   9 months</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Planned and executed technical events with a positive</p>
+                <p class="line">learning impact on students across schools and colleges.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">NSS Volunteer — Siddhant College of Engineering</p>
+                <p class="line line--date">June 2025 – Present</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Active participation in community service programmes,</p>
+                <p class="line">awareness initiatives and campus social responsibility.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--subsection">Certification — Microsoft Excel: From Zero to Hero</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line">Completed a structured certification course covering</p>
+                <p class="line">spreadsheet fundamentals, data management, formulas</p>
+                <p class="line">and workflows.</p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══ PAGE: CONTACT ════════════════════════════════ -->
+        <article class="page" id="page-contact" role="tabpanel" aria-label="Contact" hidden>
+          <div class="editor__body">
+            <div class="line-col" aria-hidden="true"></div>
+            <div class="editor__content">
+              <div class="content-block">
+
+                <p class="line line--section">Contact</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--dim">Open to conversations, collaborations and interesting problems.</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line"><span class="ln-label">GitHub    </span><a href="https://github.com/kauongit" target="_blank" rel="noopener noreferrer" class="ln-link">github.com/kauongit</a></p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line"><span class="ln-label">LinkedIn  </span><a href="https://www.linkedin.com/in/sprclfrglstcxpldcs/" target="_blank" rel="noopener noreferrer" class="ln-link">linkedin.com/in/sprclfrglstcxpldcs</a></p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line"><span class="ln-label">Email     </span><a href="mailto:alwaysinrange007@gmail.com" class="ln-link">alwaysinrange007@gmail.com</a></p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line"><span class="ln-label">Location  </span><span class="ln-val">Pune, Maharashtra, India</span></p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--rule">─────────────────────────────────────────────</p>
+                <p class="line line--blank">&nbsp;</p>
+                <p class="line line--dim">Portfolio source code available on GitHub at kauongit.</p>
+                <p class="line line--dim">Published via GitHub Pages.</p>
+                <p class="line line--dim">Built for the AWS Student Builder Challenge.</p>
+                <p class="line line--blank">&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </main><!-- /editor -->
+
+      <!-- ══ BOTTOM PANEL (VS Code style) ═════════════════ -->
+      <div class="bottom-panel" id="terminalPanel" hidden aria-label="Curiosity Terminal">
+
+        <!-- Drag resize handle -->
+        <div class="bottom-panel__resize" id="panelResize" aria-hidden="true"></div>
+
+        <!-- Panel header -->
+        <div class="bottom-panel__header">
+          <div class="bottom-panel__tab-strip" role="tablist" aria-label="Panel tabs">
+            <button class="bp-tab bp-tab--active" role="tab" aria-selected="true">TERMINAL</button>
+          </div>
+          <div class="bottom-panel__actions">
+            <span class="bp-shell-label">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path d="M1 3l5 4-5 4V3zm5 9h9v-1H6v1z"/></svg>
+              curiosity
+            </span>
+            <button class="bp-action-btn" id="termMaximise" aria-label="Maximise panel" title="Maximise panel">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="15" height="15" aria-hidden="true"><path d="M3 3h4v1H4v3H3V3zm6 9h3V9h1v4h-4v-1zM3 9v4h4v-1H4v-3H3zm10-6H9v1h3v3h1V3z"/></svg>
+            </button>
+            <button class="bp-action-btn" id="termClose" aria-label="Close panel" title="Close panel">✕</button>
           </div>
         </div>
-      </section>
 
-      <!-- ── EDUCATION ──────────────────────────────────────── -->
-      <section id="education" class="section" aria-labelledby="education-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Education ────────────────────── */</span>
-          <h2 class="section__title" id="education-heading">
-            <span class="token token--keyword">const </span><span class="token token--var">education</span>
-            <span class="token token--op"> = </span><span class="token token--brace">[</span>
-          </h2>
+        <!-- Quick command chips -->
+        <div class="bottom-panel__chips" role="group" aria-label="Quick commands">
+          <button class="chip" data-cmd="help">help</button>
+          <button class="chip" data-cmd="whoami">whoami</button>
+          <button class="chip" data-cmd="skills">skills</button>
+          <button class="chip" data-cmd="projects">projects</button>
+          <button class="chip" data-cmd="experience">experience</button>
+          <button class="chip" data-cmd="funfact">funfact</button>
+          <button class="chip" data-cmd="surprise">surprise</button>
         </div>
-        <div class="education__grid">
-          <article class="edu-card edu-card--current">
-            <div class="edu-card__year">2024–2028</div>
-            <h3 class="edu-card__degree">Bachelor of Engineering</h3>
-            <p class="edu-card__field">Artificial Intelligence &amp; Machine Learning</p>
-            <p class="edu-card__school">Siddhant College of Engineering, Pune</p>
-            <span class="status-badge status-badge--current">In Progress</span>
-          </article>
-          <article class="edu-card">
-            <div class="edu-card__year">2021–2024</div>
-            <h3 class="edu-card__degree">Higher Secondary Certificate</h3>
-            <p class="edu-card__field">Science</p>
-            <p class="edu-card__school">ASM Geetamata English ACS Junior College</p>
-          </article>
-          <article class="edu-card">
-            <div class="edu-card__year">2010–2021</div>
-            <h3 class="edu-card__degree">SSC</h3>
-            <p class="edu-card__field">Secondary School Certificate</p>
-            <p class="edu-card__school">Alphonsa High School</p>
-          </article>
+
+        <!-- Output -->
+        <div class="bottom-panel__output" id="termOutput" aria-live="polite">
+          <p class="term-boot"><span class="term-accent">kaustubh@portfolio</span> ~ boot sequence complete. Type <span class="term-accent">help</span> to explore.</p>
         </div>
-        <div class="section__close"><span class="token token--brace">]</span><span class="token token--punct">;</span></div>
-      </section>
 
-      <!-- ── CONTACT ────────────────────────────────────────── -->
-      <section id="contact" class="section" aria-labelledby="contact-heading">
-        <div class="section__header">
-          <span class="token token--comment">/* ── Contact ──────────────────────── */</span>
-          <h2 class="section__title" id="contact-heading">
-            <span class="token token--fn">connect</span><span class="token token--punct">()</span> <span class="token token--brace">{</span>
-          </h2>
-          <p class="section__subtitle token token--comment">// Open to collaborations, conversations, and interesting problems.</p>
+        <!-- Input row -->
+        <div class="bottom-panel__input-row">
+          <span class="term-ps1" aria-hidden="true"><span class="ps1-u">kaustubh</span><span class="ps1-s">@</span><span class="ps1-h">portfolio</span><span class="ps1-d">:~$</span></span>
+          <input type="text" id="termInput" class="bottom-panel__input"
+            placeholder="type a command…"
+            autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            aria-label="Terminal command input" />
+          <button class="bottom-panel__run" id="termRun" aria-label="Run command">▶</button>
         </div>
-        <div class="contact__grid">
-          <a href="https://github.com/kauongit" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="GitHub — kauongit">
-            <div class="contact-card__icon">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            </div>
-            <h3 class="contact-card__title">GitHub</h3>
-            <p class="contact-card__handle">kauongit</p>
-          </a>
-          <a href="https://www.linkedin.com/in/sprclfrglstcxpldcs/" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="LinkedIn — Kaustubh Bhabal">
-            <div class="contact-card__icon">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </div>
-            <h3 class="contact-card__title">LinkedIn</h3>
-            <p class="contact-card__handle">Kaustubh Bhabal</p>
-          </a>
-          <a href="mailto:alwaysinrange007@gmail.com" class="contact-card" aria-label="Email Kaustubh">
-            <div class="contact-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <h3 class="contact-card__title">Email</h3>
-            <p class="contact-card__handle">alwaysinrange007@gmail.com</p>
-          </a>
-        </div>
-        <div class="section__close"><span class="token token--brace">}</span></div>
-      </section>
 
-    </main><!-- /editor-content -->
+      </div><!-- /bottom-panel -->
 
-    <!-- ── STATUS BAR (VS Code bottom strip) ─────────────── -->
-    <footer class="status-bar" role="contentinfo" aria-label="Status bar">
-      <div class="status-bar__left">
-        <span class="status-item status-item--branch">
-          <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 019 8.5H7a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 017 7h2a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25z"/></svg>
-          main
-        </span>
-        <span class="status-item">
-          <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M1 2.5A1.5 1.5 0 012.5 1h8.75a.75.75 0 010 1.5H2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2.5a.75.75 0 010 1.5h-2.5A1.5 1.5 0 011 10.5v-8zm4.5 9.25a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v1.25a.75.75 0 11-1.5 0V13H5.75a.25.25 0 01-.25-.25v-1.25zm-.25-1.5a1.75 1.75 0 100 3.5h8.5a1.75 1.75 0 100-3.5h-8.5z"/></svg>
-          0 errors · 0 warnings
-        </span>
-      </div>
-      <div class="status-bar__center">
-        <span class="status-item status-item--name">KAUSTUBH.EXE — Curiosity beats obsession.</span>
-      </div>
-      <div class="status-bar__right">
-        <span class="status-item">UTF-8</span>
-        <span class="status-item">HTML</span>
-        <span class="status-item">Ln 1, Col 1</span>
-        <span class="status-item">Spaces: 2</span>
-        <span class="status-item status-item--amethyst">Amethyst Theme</span>
-      </div>
-    </footer>
+    </div><!-- /editor-column -->
+  </div><!-- /vscode-shell -->
 
-  </div><!-- /editor-area -->
+  <!-- ── STATUS BAR ─────────────────────────────────────────── -->
+  <footer class="status-bar" role="contentinfo">
+    <div class="status-bar__left">
+      <span class="status-bar__item">VS Code, but it's my portfolio</span>
+    </div>
+    <div class="status-bar__right">
+      <span class="status-bar__item">MADE WITH KIRO</span>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
