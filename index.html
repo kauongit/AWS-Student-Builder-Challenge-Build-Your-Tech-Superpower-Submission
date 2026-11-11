@@ -16,8 +16,49 @@
   <a href="#editor" class="skip-link">Skip to content</a>
 
   <!-- ════════════════════════════════════════════════════════
-       VS CODE SHELL
+       MOBILE ROAST SCREEN
        ════════════════════════════════════════════════════════ -->
+  <div class="mobile-roast" id="mobileRoast" aria-live="polite" aria-label="Mobile device warning">
+    <div class="mobile-roast__window">
+
+      <!-- Fake title bar -->
+      <div class="mobile-roast__titlebar">
+        <div class="mobile-roast__dots">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+        </div>
+        <span class="mobile-roast__title">error.exe — VS Code</span>
+      </div>
+
+      <!-- Error body -->
+      <div class="mobile-roast__body">
+        <p class="roast-line"><span class="roast-err">ERROR</span> <span class="roast-code">0x000PHONE</span></p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+        <p class="roast-line"><span class="roast-kw">VS Code</span> has stopped working.</p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+        <p class="roast-line roast-comment">// Reason: you opened a VS Code portfolio</p>
+        <p class="roast-line roast-comment">// on a phone. On a PHONE.</p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+        <p class="roast-line">VS Code runs on <span class="roast-hl">Windows</span>, <span class="roast-hl">macOS</span> and <span class="roast-hl">Linux</span>.</p>
+        <p class="roast-line">Not on whatever that is in your hand.</p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+        <p class="roast-line roast-comment">// Suggested fix:</p>
+        <p class="roast-line">  → Put the phone down.</p>
+        <p class="roast-line">  → Open a real computer.</p>
+        <p class="roast-line">  → Come back.</p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+        <p class="roast-line roast-comment">// Alternatively, proceed at your own risk.</p>
+        <p class="roast-line roast-comment">// No guarantees. You've been warned.</p>
+        <p class="roast-line roast-line--blank">&nbsp;</p>
+
+        <button class="roast-btn" id="roastDismiss">
+          I understand the consequences &gt;_
+        </button>
+      </div>
+
+    </div>
+  </div>
   <div class="vscode-shell">
 
     <!-- ── ACTIVITY BAR ───────────────────────────────────── -->
@@ -564,5 +605,32 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <script>
+    /* ── MOBILE ROAST ───────────────────────────────────────
+       Show the roast screen on touch/mobile devices.
+       Dismissed state is remembered for the session.
+    ─────────────────────────────────────────────────────── */
+    (function () {
+      const roast   = document.getElementById('mobileRoast');
+      const dismiss = document.getElementById('roastDismiss');
+      if (!roast) return;
+
+      const isMobile = window.matchMedia('(max-width: 768px)').matches
+                    || ('ontouchstart' in window && window.innerWidth < 1024);
+
+      if (isMobile && !sessionStorage.getItem('roastDismissed')) {
+        roast.classList.add('mobile-roast--visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      dismiss?.addEventListener('click', () => {
+        roast.classList.remove('mobile-roast--visible');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('roastDismissed', '1');
+      });
+    })();
+  </script>
+
 </body>
 </html>
